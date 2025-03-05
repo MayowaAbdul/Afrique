@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import BeamAfrique from '../assets/BeamAfrique.png';
 
 const Home = () => {
   return (
@@ -15,7 +16,7 @@ const Home = () => {
         <div className="relative h-full max-w-7xl mx-auto px-4 flex flex-col justify-center text-white">
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
             <img 
-              src="/beamafrique-logo.png" 
+              src={BeamAfrique} 
               alt="BeamAfrique" 
               className="h-24 md:h-32 mb-6"
             />

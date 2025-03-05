@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import BeamAfrique from '../assets/BeamAfrique.png';
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +36,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <img 
-                src="/beamafrique-logo.png" 
+                src={BeamAfrique}
                 alt="BeamAfrique" 
                 className="h-12 transform hover:scale-105 transition-all duration-300"
               />
