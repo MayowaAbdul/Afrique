@@ -1,6 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Instagram, Youtube, Mail } from 'lucide-react';
+import BeamAfrique from '../assets/BeamAfrique.png';
 
 const Footer = () => {
   return (
@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="fade-in">
             <img 
-              src="/beamafrique-logo.png" 
+              src={BeamAfrique}
               alt="BeamAfrique" 
               className="h-12 mb-4 hover:scale-105 transition-all duration-300"
             />
