@@ -1,4 +1,3 @@
-import React from 'react';
 import { ExternalLink, PlayCircle } from 'lucide-react';
 
 const TV = () => {

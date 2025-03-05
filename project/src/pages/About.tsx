@@ -1,4 +1,3 @@
-import React from 'react';
 import { Globe2, Users, BookOpen, Map, Building2, Languages } from 'lucide-react';
 
 const About = () => {
