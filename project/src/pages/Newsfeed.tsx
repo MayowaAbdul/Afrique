@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Article from '../assets/Article.jpg'
 
 interface NewsItem {
   id: number;
@@ -69,7 +70,7 @@ const Newsfeed = () => {
                 {generateNewsItems(region.name).map((news) => (
                   <div key={news.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
                     <img
-                      src={news.image}
+                      src={Article}
                       alt={news.title}
                       className="w-full h-48 object-cover"
                     />
@@ -99,7 +100,7 @@ const Newsfeed = () => {
             <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
               <div className="p-6">
                 <img
-                  src={selectedNews.image}
+                  src={Article}
                   alt={selectedNews.title}
                   className="w-full h-64 object-cover rounded-lg mb-4"
                 />
