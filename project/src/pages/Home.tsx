@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import BeamAfrique from '../assets/BeamAfrique.png';
+import Article from '../assets/Article.jpg'
 
 const Home = () => {
   return (
@@ -75,7 +76,7 @@ const Home = () => {
             {[1, 2, 3].map((item) => (
               <div key={item} className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
                 <img
-                  src={`https://images.unsplash.com/photo-${1500000000000 + item}?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80`}
+                  src={Article}
                   alt="Story"
                   className="w-full h-48 object-cover"
                 />

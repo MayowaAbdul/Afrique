@@ -14,7 +14,7 @@ const Magazine = () => {
   const [selectedIssue, setSelectedIssue] = useState<MagazineIssue | null>(null);
 
   const generateMagazineIssues = (): MagazineIssue[] => 
-    [...Array(20)].map((_, index) => ({
+    [...Array(12)].map((_, index) => ({
       id: index + 1,
       title: `Africa Rising: Issue ${index + 1}`,
       date: `March ${index + 1}, 2024`,
