@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Download } from 'lucide-react';
+import Abiy from '../assets/Abiy.jpg';
+import Bishoftu from '../assets/Bishoftu.avif'
 
 interface MagazineIssue {
   id: number;
@@ -12,37 +13,31 @@ interface MagazineIssue {
 
 const Magazine = () => {
   const [selectedIssue, setSelectedIssue] = useState<MagazineIssue | null>(null);
+  const [modalContent, setModalContent] = useState<string | null>(null);
 
-  const generateMagazineIssues = (): MagazineIssue[] => 
-    [...Array(12)].map((_, index) => ({
-      id: index + 1,
-      title: `Africa Rising: Issue ${index + 1}`,
-      date: `March ${index + 1}, 2024`,
-      summary: 'Exploring Africa\'s rich heritage and future.',
-      content: `Issue ${index + 1}: Africa Rising
+  const magazineIssues: MagazineIssue[] = [
+    {
+      id: 1,
+      title: "Meet The New Ethopian PM",
+      date: "March 1, 2025",
+      summary: "Dive into the life of a new dawn in Ethiopia.",
+      content: "Dr. Abiy Ahmed Ali, Ethiopia’s Prime Minister since April 2, 2018, was born on August 15, 1976. His childhood name, Abiyot, meaning ‘Revolution,’ reflects his journey as a social activist and administrator. His rise to power was driven by a three-year revolutionary protest and Ethiopia’s first leadership election within the Ethiopian Peoples’ Revolutionary Democratic Front (EPRDF). More than his military background, his thirst for knowledge and commitment to practicality shaped his success. Dr. Abiy’s educational journey began in his hometown, excelling in Agaro town for his secondary education. His decision to learn the Tigrigna language as a member of the Oromo Peoples’ Democratic Organization (OPDO) demonstrated his strategic foresight. Rising through the military ranks, he became an intelligence expert and later joined the United Nations Peacekeeping Force in Rwanda in 1995. His pursuit of education continued alongside his military service, earning degrees in Computer Engineering, Cryptography, and later, a Ph.D. in Peace and Security Studies from Addis Ababa University. His leadership skills emerged early when he successfully mediated inter-religious conflicts in his hometown of Beshasha. His Ph.D. thesis on social capital in conflict resolution underscored his commitment to peacebuilding. His role in co-founding the Ethiopian Information Network Security Agency (INSA) in 2007 and serving as Deputy and Acting Director further established him as a key figure in Ethiopia’s political and security landscape. Transitioning into politics in 2010, Dr. Abiy became a member of Ethiopia’s Parliament, representing the Agaro constituency. His rapid ascent continued as he gained leadership roles within OPDO and the EPRDF. Following the resignation of former Prime Minister Hailemariam Desalegn in early 2018, Abiy emerged as OPDO’s candidate in Ethiopia’s first-ever prime ministerial election. Despite opposition from some factions, he secured victory, marking a new era in Ethiopian politics. On April 2, 2018, Dr. Abiy Ahmed was sworn in as Ethiopia’s 13th Prime Minister. His inaugural speech emphasized hope, unity, and reform, setting high expectations for Ethiopia’s future. His leadership journey exemplifies the power of knowledge, resilience, and a commitment to national service, offering an inspiring model for leadership across Africa and beyond.",
+      image: Abiy
+    },
+    {
+      id: 2,
+      title: "Bishoftu: ",
+      date: "March 8, 2024",
+      summary: "Check Africa’s Industrial Capital In The Making",
+      content: "Bishoftu, located 45km southeast of Addis Ababa in Ethiopia’s Oromiya Province, is rapidly transforming into an economic hub. Known as the 'land of many lakes, it is surrounded by scenic landscapes, lakes, farmlands, and a mix of ancient and modern settlements. The town is home to the Bishoftu Automotive Engineering Industry, a remarkable testament to Ethiopia’s commitment to technological advancement and self-reliance in the automotive sector. This industry specializes in automobile engineering, including vehicle design, manufacturing, and assembly of both military and commercial vehicles. It also offers consultancy and training in automotive technology. The facility produces a wide range of vehicles, from luxury city buses and school buses to mini trucks, dump trucks, water trucks, and station wagons. Additionally, it houses bicycle and motorcycle assembly lines, further expanding its scope. Operated with a disciplined, militarized structure, the Bishoftu Automotive Engineering Industry is overseen by a military captain, with Captain Sisey Tessema serving as the General Manager of the Bus Factory Division. The facility employs 3,600 workers, with a near-equal distribution of men and women. It also provides opportunities for engineering graduates to gain practical experience. The Ethiopian government’s focus on import substitution has driven the growth of this industry, ensuring a steady supply of high-quality, locally made vehicles. A key strategy behind Ethiopia’s automotive development is its deliberate policy to reduce reliance on imported vehicles by imposing high tariffs, encouraging citizens to support locally produced alternatives. As a result, roads in Addis Ababa and beyond are filled with homegrown vehicles, reinforcing the nation’s vision for economic self-sufficiency. Moreover, Ethiopia’s efficient and affordable public rail system has become a model of transport accessibility, serving both the masses and the affluent. Despite being a landlocked nation dependent on Djibouti for port services, Ethiopia has successfully pursued a robust economic recovery plan since 1992. By maximizing its available resources and mobilizing skilled professionals from across the globe, the country has transitioned from being one of the world’s poorest nations to a rising industrial force in Africa. Through initiatives like Bishoftu, Ethiopia is steadily positioning itself as the continent’s next industrial powerhouse and a beacon of economic transformation.",
+      image: Bishoftu
+    }
+  ];
 
-      In this compelling issue of BeamAfrique Magazine, we delve deep into the heart of African innovation, culture, and progress. Our cover story explores the remarkable transformation of urban centers across the continent, showcasing how technology and tradition are merging to create sustainable, smart cities of tomorrow.
-
-      Featured Articles:
-
-      1. The Digital Revolution
-      Africa's tech ecosystem is booming, with startups in fintech, agritech, and healthtech leading the charge. We explore how young entrepreneurs are leveraging technology to solve local challenges and create global solutions.
-
-      2. Cultural Renaissance
-      From contemporary art galleries in Lagos to fashion houses in Nairobi, Africa's creative industry is experiencing unprecedented growth. We showcase the artists, designers, and creators who are redefining African aesthetics for the global stage.
-
-      3. Sustainable Development
-      Our special report examines innovative environmental initiatives across the continent, from renewable energy projects in Morocco to conservation efforts in Tanzania. Learn how African nations are leading the fight against climate change.
-
-      4. Economic Transformation
-      With the African Continental Free Trade Area in full swing, we analyze the opportunities and challenges in creating the world's largest free trade area. Experts share insights on how this historic agreement is reshaping business across borders.
-
-      5. Future Leaders
-      Meet the young visionaries who are driving change in their communities. From social entrepreneurs to political activists, these individuals are writing Africa's next chapter.
-
-      This issue represents our commitment to showcasing Africa's journey towards a brighter, more prosperous future. Through in-depth analysis, compelling photography, and expert perspectives, we bring you the stories that matter.`,
-      image: `https://images.unsplash.com/photo-${1500000000000 + index}?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80`
-    }));
+  const openModal = (issue: MagazineIssue) => {
+    setSelectedIssue(issue);
+    setModalContent(issue.content);
+  };
 
   return (
     <div className="min-h-screen bg-red-50 py-16">
@@ -50,49 +45,25 @@ const Magazine = () => {
         <h1 className="text-4xl font-bold text-center mb-12">BeamAfrique Magazine</h1>
         
         <div className="grid md:grid-cols-4 gap-6">
-          {generateMagazineIssues().map((issue) => (
+          {magazineIssues.map((issue) => (
             <div key={issue.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-              <img
-                src={issue.image}
-                alt={issue.title}
-                className="w-full h-48 object-cover"
-              />
+              <img src={issue.image} alt={issue.title} className="w-full h-48 object-cover" />
               <div className="p-4">
                 <span className="text-sm text-gray-500">{issue.date}</span>
                 <h3 className="text-lg font-semibold mt-2 mb-2">{issue.title}</h3>
-                <p className="text-gray-600 text-sm mb-3">
-                  {issue.summary}
-                </p>
-                <div className="space-y-2">
-                  <button 
-                    onClick={() => setSelectedIssue(issue)}
-                    className="w-full bg-red-600 text-white py-2 rounded-lg text-sm hover:bg-red-700 transition duration-300"
-                  >
-                    Read Online
-                  </button>
-                </div>
+                <p className="text-gray-600 text-sm mb-3">{issue.summary}</p>
+                <button 
+                  onClick={() => openModal(issue)}
+                  className="w-full bg-red-600 text-white py-2 rounded-lg text-sm hover:bg-red-700 transition duration-300"
+                >
+                  Read Online
+                </button>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Download Complete Magazine Section */}
-        <div 
-          className="mt-16 rounded-lg p-8 text-white text-center bg-cover bg-center"
-          style={{
-            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80")'
-          }}
-        >
-          <h2 className="text-2xl font-bold mb-4">Download Complete Magazine Collection</h2>
-          <p className="mb-6">Get access to our entire magazine collection in high quality PDF format</p>
-          <button className="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 inline-flex items-center">
-            <Download className="mr-2 h-5 w-5" />
-            Download Complete Collection
-          </button>
-        </div>
-
-        {/* Modal */}
-        {selectedIssue && (
+        {selectedIssue && modalContent && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
               <div className="p-6">
@@ -110,21 +81,12 @@ const Magazine = () => {
                     </svg>
                   </button>
                 </div>
-
-                <img
-                  src={selectedIssue.image}
-                  alt={selectedIssue.title}
-                  className="w-full h-96 object-cover rounded-lg mb-6"
-                />
-
+                <img src={selectedIssue.image} alt={selectedIssue.title} className="w-full h-96 object-cover rounded-lg mb-6" />
                 <div className="prose max-w-none">
-                  {selectedIssue.content.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="mb-4 text-gray-700 leading-relaxed">
-                      {paragraph}
-                    </p>
+                  {modalContent.split('\n\n').map((paragraph, index) => (
+                    <p key={index} className="mb-4 text-gray-700 leading-relaxed">{paragraph}</p>
                   ))}
                 </div>
-
                 <div className="mt-8 flex space-x-4">
                   <button
                     onClick={() => setSelectedIssue(null)}

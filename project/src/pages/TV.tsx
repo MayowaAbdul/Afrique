@@ -7,7 +7,7 @@ const TV = () => {
         <h1 className="text-4xl font-bold text-center mb-12">BeamAfrique TV</h1>
         
         <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {[...Array(12)].map((_, video) => (
+          {[...Array(8)].map((_, video) => (
             <div key={video} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
               <div className="relative">
                 <img
