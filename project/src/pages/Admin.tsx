@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { Upload, Video, Newspaper, Tv, Calendar, BookOpen } from 'lucide-react';
 
 interface UploadForm {
@@ -68,16 +69,31 @@ const Admin = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsUploading(true);
-
+  
+    // Create a new FormData object
+    const formData = new FormData();
+  
     try {
       if (activeSection === 'magazine') {
         if (!magazineForm.coverImage) {
           throw new Error('Please select a cover image');
         }
-        // Simulate magazine upload delay
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        // Reset magazine form
+        // Append magazine-specific fields (ensure keys match Django serializer fields)
+        formData.append('cover_image', magazineForm.coverImage);
+        formData.append('title', magazineForm.title);
+        formData.append('date', magazineForm.date);
+        formData.append('summary', magazineForm.summary);
+        formData.append('content', magazineForm.content);
+  
+        // Send the POST request to the magazine endpoint
+        const response = await axios.post(
+          'http://127.0.0.1:8000/api/magazine/',
+          formData,
+          { headers: { 'Content-Type': 'multipart/form-data' } }
+        );
+        console.log(response.data);
+  
+        // Reset magazine form after successful upload
         setMagazineForm({
           coverImage: null,
           title: '',
@@ -89,10 +105,23 @@ const Admin = () => {
         if (!uploadForm.file) {
           throw new Error('Please select a file');
         }
-        // Simulate upload delay
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
-        // Reset form
+        // Append fields for other content types
+        formData.append('file', uploadForm.file);
+        formData.append('title', uploadForm.title || '');
+        formData.append('description', uploadForm.description || '');
+        formData.append('region', uploadForm.region || '');
+        formData.append('youtube_url', uploadForm.youtubeUrl || '');
+        formData.append('section', activeSection);
+  
+        // Send the POST request to the generic upload endpoint
+        const response = await axios.post(
+          'http://127.0.0.1:8000/api/upload/',
+          formData,
+          { headers: { 'Content-Type': 'multipart/form-data' } }
+        );
+        console.log(response.data);
+  
+        // Reset the upload form after successful upload
         setUploadForm({
           file: null,
           title: '',
@@ -101,8 +130,8 @@ const Admin = () => {
           youtubeUrl: ''
         });
       }
-
-      alert('Content uploaded successfully! (Demo only)');
+  
+      alert('Content uploaded successfully!');
     } catch (error) {
       console.error('Error uploading content:', error);
       alert('Error uploading content. Please try again.');

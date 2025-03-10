@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import Article from '../assets/Article.jpg'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Article from '../assets/Article.jpg';
 
 interface NewsItem {
   id: number;
@@ -8,11 +9,25 @@ interface NewsItem {
   summary: string;
   content: string;
   image: string;
+  region: string;
 }
 
 const Newsfeed = () => {
+  const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
 
+  //  news items from  backend
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/api/upload/', { params: { section: 'news' } })
+      .then(response => {
+        setNewsItems(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching news items:', error);
+      });
+  }, []);
+
+  // Group news items by region
   const regions = [
     { name: 'West Africa', color: 'red' },
     { name: 'East Africa', color: 'green' },
@@ -24,36 +39,8 @@ const Newsfeed = () => {
     { name: 'America', color: 'green' },
   ];
 
-  const generateNewsItems = (region: string): NewsItem[] => [
-    {
-      id: Math.random(),
-      title: `Latest Development in ${region}`,
-      date: 'March 14, 2024',
-      summary: `Breaking news and updates from ${region}...`,
-      content: `In a groundbreaking development from ${region}, significant progress has been made in various sectors including technology, agriculture, and infrastructure. Local leaders have announced new initiatives aimed at boosting economic growth and fostering international partnerships.
-
-      Recent studies have shown a remarkable increase in foreign investment, particularly in renewable energy projects and digital infrastructure. This trend is expected to create thousands of new jobs and contribute to sustainable development in the region.
-      
-      Furthermore, cultural exchange programs between ${region} and other global regions have been expanded, promoting mutual understanding and cooperation. These initiatives have been widely praised by international observers and are seen as a model for regional development.
-      
-      The local government has also unveiled plans for major infrastructure projects, including new transportation networks and urban development initiatives. These projects are expected to significantly improve connectivity and living standards for millions of residents.`,
-      image: `https://images.unsplash.com/photo-${1500000000000 + Math.floor(Math.random() * 10)}?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80`
-    },
-    {
-      id: Math.random(),
-      title: `Economic Growth in ${region}`,
-      date: 'March 14, 2024',
-      summary: `Economic updates and market analysis from ${region}...`,
-      content: `The economic landscape in ${region} has shown remarkable resilience and growth in recent months. Key indicators point to a robust recovery in various sectors, with particular strength in technology, agriculture, and manufacturing.
-
-      Local businesses have reported increased productivity and expansion plans, while foreign investment continues to flow into the region. Government initiatives to support small and medium enterprises have yielded positive results, creating a more dynamic and inclusive economy.
-      
-      The region's commitment to sustainable development has attracted significant international attention, with several major companies announcing plans to establish operations in key cities. This has led to increased job opportunities and knowledge transfer.
-      
-      Innovation hubs and technology centers are flourishing, positioning ${region} as a leading destination for tech startups and digital transformation initiatives. The government's focus on digital infrastructure and skills development has created a favorable environment for technological advancement.`,
-      image: `https://images.unsplash.com/photo-${1500000000000 + Math.floor(Math.random() * 10)}?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80`
-    }
-  ];
+  const groupNewsByRegion = (region: string): NewsItem[] =>
+    newsItems.filter(news => news.region === region);
 
   return (
     <div className="min-h-screen bg-gray-50 py-16">
@@ -67,10 +54,10 @@ const Newsfeed = () => {
                 {region.name}
               </h2>
               <div className="space-y-6">
-                {generateNewsItems(region.name).map((news) => (
+                {groupNewsByRegion(region.name).map((news) => (
                   <div key={news.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
                     <img
-                      src={Article}
+                      src={news.file || Article}
                       alt={news.title}
                       className="w-full h-48 object-cover"
                     />
@@ -100,7 +87,7 @@ const Newsfeed = () => {
             <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
               <div className="p-6">
                 <img
-                  src={Article}
+                  src={selectedNews.image || Article}
                   alt={selectedNews.title}
                   className="w-full h-64 object-cover rounded-lg mb-4"
                 />
