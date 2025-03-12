@@ -136,6 +136,56 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      <section className="py-16 bg-red-50">
+  <div className="max-w-7xl mx-auto px-4">
+    <h2 className="text-3xl font-bold mb-12 text-center text-gray-800">Meet the Team</h2>
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+      {[
+        {
+          name: "Amina Bello",
+          role: "Editor-in-Chief",
+          image: "https://randomuser.me/api/portraits/women/44.jpg"
+        },
+        {
+          name: "Kwame Mensah",
+          role: "Lead Correspondent, West Africa",
+          image: "https://randomuser.me/api/portraits/men/45.jpg"
+        },
+        {
+          name: "Zanele Dlamini",
+          role: "Head of Multimedia",
+          image: "https://randomuser.me/api/portraits/women/46.jpg"
+        },
+        {
+          name: "Jean-Claude Mumbere",
+          role: "French Language Editor",
+          image: "https://randomuser.me/api/portraits/men/46.jpg"
+        },
+        {
+          name: "Chen Wei",
+          role: "Asia Bureau Coordinator",
+          image: "https://randomuser.me/api/portraits/men/52.jpg"
+        },
+        {
+          name: "Fatoumata Diop",
+          role: "Senior Writer",
+          image: "https://randomuser.me/api/portraits/women/52.jpg"
+        },
+      ].map((member, index) => (
+        <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-xl transition duration-300">
+          <img
+            src={member.image}
+            alt={member.name}
+            className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
+          />
+          <h3 className="text-xl font-semibold text-gray-800">{member.name}</h3>
+          <p className="text-red-600 font-medium">{member.role}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
     </div>
   );
 };
