@@ -10,6 +10,7 @@ interface NewsItem {
   content: string;
   image: string;
   region: string;
+  file: string;
 }
 
 const Newsfeed = () => {
