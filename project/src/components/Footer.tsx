@@ -47,7 +47,7 @@ const Footer = () => {
                 Editorial: Lagos, Nigeria
               </li>
               <li className="hover:text-white transition-colors duration-300 hover:translate-x-2">
-                Email: info@beamafrique.com
+                Email: beamafrique@gmail.com
               </li>
               <li className="hover:text-white transition-colors duration-300 hover:translate-x-2">
                 Phone: +250 123 456 789

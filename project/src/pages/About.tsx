@@ -1,4 +1,13 @@
 import { Globe2, Users, BookOpen, Map, Building2, Languages } from 'lucide-react';
+import rasheed from '../assets/rasheed.jpg';
+import charles from '../assets/charles.jpg';
+import benjamin from '../assets/benja.jpg';
+import rabecca from '../assets/rabecca.jpg';
+import adewale from '../assets/adewale.jpg';
+import roy from '../assets/roy.jpg';
+import olasumbo from '../assets/olasumbo.jpg';
+import akunna from '../assets/akunna.jpg';
+import redeit from '../assets/redeit.jpg';
 
 const About = () => {
   const features = [
@@ -143,34 +152,58 @@ const About = () => {
     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
       {[
         {
-          name: "Amina Bello",
+          name: "RASHEED OLOKODE",
           role: "Editor-in-Chief",
-          image: "https://randomuser.me/api/portraits/women/44.jpg"
+          image: rasheed,
+          location: "Nigerian"
         },
         {
-          name: "Kwame Mensah",
-          role: "Lead Correspondent, West Africa",
-          image: "https://randomuser.me/api/portraits/men/45.jpg"
+          name: "CHARLES KUNGWENGWE",
+          role: "Editor",
+          image: charles,
+          location: "Zimbabwean"
         },
         {
-          name: "Zanele Dlamini",
-          role: "Head of Multimedia",
-          image: "https://randomuser.me/api/portraits/women/46.jpg"
+          name: "BENJAMIN SAKYI",
+          role: "Feature Editor",
+          image: benjamin,
+          location: "Ghanian"
         },
         {
-          name: "Jean-Claude Mumbere",
-          role: "French Language Editor",
-          image: "https://randomuser.me/api/portraits/men/46.jpg"
+          name: "RABECCA MUTEKA",
+          role: "Bureau Chief",
+          image: rabecca,
+          location: "South African"
         },
         {
-          name: "Chen Wei",
-          role: "Asia Bureau Coordinator",
-          image: "https://randomuser.me/api/portraits/men/52.jpg"
+          name: "ADEWALE KAZEEM",
+          role: "Graphics Designer",
+          image: adewale,
+          location: "Nigerian"
         },
         {
-          name: "Fatoumata Diop",
-          role: "Senior Writer",
-          image: "https://randomuser.me/api/portraits/women/52.jpg"
+          name: "DR. ROY MANOHAR",
+          role: "Bureau Chief",
+          image: roy,
+          location: "Indian"
+        },
+        {
+          name: "OLASUMBO OJOMU",
+          role: "Associate Publisher/Deputy Editor",
+          image: olasumbo,
+          location: "Nigerian"
+        },
+        {
+          name: "AKUNNA ASONYE",
+          role: "Graphic Artist",
+          image: akunna,
+          location: "Nigerian"
+        },
+        {
+          name: "REDEIT MESHESHA",
+          role: "Bureau Chief",
+          image: redeit,
+          location: "East African"
         },
       ].map((member, index) => (
         <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-xl transition duration-300">
@@ -181,6 +214,7 @@ const About = () => {
           />
           <h3 className="text-xl font-semibold text-gray-800">{member.name}</h3>
           <p className="text-red-600 font-medium">{member.role}</p>
+          <p className="text-black-600 font-medium">{member.location}</p>
         </div>
       ))}
     </div>
