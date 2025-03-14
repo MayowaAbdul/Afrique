@@ -1,23 +1,53 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
-const SignUp = () => {
+export default function Signup() {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
-
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted:', formData);
+    // Basic validation: Check if passwords match
+    if (formData.password !== formData.confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+    try {
+      // Send signup data to backend API
+      const response = await axios.post('http://127.0.0.1:8000/api/signup/', {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+      });
+      toast.success('Signup successful! Please log in.');
+      // Optionally clear form data
+      setFormData({
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      });
+      // Redirect to login page
+      navigate('/login');
+    } catch (error: any) {
+      console.error('Signup failed:', error);
+      // Display error message from backend if available
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.error || 'Signup failed. Please try again.');
+      } else {
+        toast.error('Signup failed. Please try again.');
+      }
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,15 +81,15 @@ const SignUp = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                Full Name
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                Username
               </label>
               <div className="mt-1 relative">
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="username"
+                  name="username"
+                  value={formData.username}
                   onChange={handleChange}
                   className="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
                   required
@@ -96,7 +126,7 @@ const SignUp = () => {
               </label>
               <div className="mt-1 relative">
                 <input
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   id="password"
                   name="password"
                   value={formData.password}
@@ -128,7 +158,7 @@ const SignUp = () => {
               </label>
               <div className="mt-1 relative">
                 <input
-                  type={showConfirmPassword ? "text" : "password"}
+                  type={showConfirmPassword ? 'text' : 'password'}
                   id="confirmPassword"
                   name="confirmPassword"
                   value={formData.confirmPassword}
@@ -177,5 +207,3 @@ const SignUp = () => {
     </div>
   );
 }
-
-export default SignUp;
