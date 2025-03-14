@@ -41,7 +41,7 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4 text-red-400">Contact</h3>
             <ul className="text-gray-300 space-y-2">
               <li className="hover:text-white transition-colors duration-300 hover:translate-x-2">
-                Global HQ: Kigali, Rwanda
+                Global HQ: Krobo 1&2, Asafo Adjaye, St.Teshie Tsui Bleoo, Accra - Ghana 
               </li>
               <li className="hover:text-white transition-colors duration-300 hover:translate-x-2">
                 Editorial: Lagos, Nigeria
@@ -50,7 +50,7 @@ const Footer = () => {
                 Email: beamafrique@gmail.com
               </li>
               <li className="hover:text-white transition-colors duration-300 hover:translate-x-2">
-                Phone: +250 123 456 789
+                Phone: +233244566067/ +233262422070
               </li>
             </ul>
           </div>

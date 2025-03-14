@@ -188,7 +188,7 @@ const About = () => {
           location: "Indian"
         },
         {
-          name: "OLASUMBO OJOMU",
+          name: "OLASUNMBO OJOMU",
           role: "Associate Publisher/Deputy Editor",
           image: olasumbo,
           location: "Nigerian"
