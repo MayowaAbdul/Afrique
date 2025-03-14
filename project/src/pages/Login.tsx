@@ -9,7 +9,7 @@ interface LoginFormData {
   password: string;
 }
 
-export default function Login() {
+const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<LoginFormData>({
@@ -153,3 +153,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default Login;

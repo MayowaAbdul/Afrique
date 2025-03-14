@@ -2,6 +2,7 @@ import  { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import BeamAfrique from '../assets/BeamAfrique.png';
+import { label, path } from 'framer-motion/client';
 
 
 const Navbar = () => {
@@ -22,6 +23,8 @@ const Navbar = () => {
     { path: '/events', label: 'Events' },
     { path: '/contact', label: 'Contact' },
     { path: '/dashboard', label: 'Dashboard' },
+    {path: '/login', label: 'Login'},
+    {path: '/signup', label: 'SignUp'},
     { path: '/admin', label: 'Admin', className: 'text-red-600 font-bold' }
   ];
 

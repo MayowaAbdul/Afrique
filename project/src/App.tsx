@@ -7,6 +7,8 @@ import About from './pages/About';
 import Newsfeed from './pages/Newsfeed';
 import Magazine from './pages/Magazine';
 import TV from './pages/TV';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 import Gallery from './pages/Gallery';
 import Events from './pages/Events';
 import Contact from './pages/Contact';
@@ -47,6 +49,10 @@ function App() {
             <Route path="/events" element={<PageWrapper><Events /></PageWrapper>} />
             
             <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+
+            <Route path="/login" element={<PageWrapper><Login /></PageWrapper>}/>
+
+            <Route path="/signup" element={<PageWrapper><SignUp /></PageWrapper>} />
 
             <Route path="/dashboard" element={<PageWrapper><Dashboard /></PageWrapper>} />
             

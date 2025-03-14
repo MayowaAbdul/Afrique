@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function Signup() {
+const SignUp = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -177,3 +177,5 @@ export default function Signup() {
     </div>
   );
 }
+
+export default SignUp;
