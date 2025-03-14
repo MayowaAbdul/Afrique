@@ -12,6 +12,7 @@ export default function Signup() {
     password: '',
     confirmPassword: '',
   });
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -75,7 +76,7 @@ export default function Signup() {
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900">Create an Account</h1>
             <p className="mt-2 text-gray-600">
-              Join The Dawah Academy and start your journey of Islamic learning
+              BeamAfrique
             </p>
           </div>
 

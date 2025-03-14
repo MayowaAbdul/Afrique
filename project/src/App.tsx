@@ -14,8 +14,6 @@ import Events from './pages/Events';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import Admin from './pages/Admin';
-import Login from './pages/Login';
-import Signup from './pages/SignUp';
 import ProtectedRoute from './components/ProtectedRoute';
 
 
@@ -61,9 +59,6 @@ function App() {
             
             <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
 
-            <Route path="/login" element={<Login />} />
-
-            <Route path="/signup" element={<Signup />} />
             
           </Routes>
         </div>
