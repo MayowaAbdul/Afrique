@@ -21,6 +21,7 @@ const Navbar = () => {
     { path: '/gallery', label: 'Photo Gallery' },
     { path: '/events', label: 'Events' },
     { path: '/contact', label: 'Contact' },
+    { path: '/dashboard', label: 'Dashboard' },
     { path: '/admin', label: 'Admin', className: 'text-red-600 font-bold' }
   ];
 

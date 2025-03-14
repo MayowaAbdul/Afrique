@@ -10,7 +10,9 @@ import TV from './pages/TV';
 import Gallery from './pages/Gallery';
 import Events from './pages/Events';
 import Contact from './pages/Contact';
+import Dashboard from './pages/Dashboard';
 import Admin from './pages/Admin';
+
 
 // Wrapper component for page transitions
 const PageWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -45,6 +47,8 @@ function App() {
             <Route path="/events" element={<PageWrapper><Events /></PageWrapper>} />
             
             <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+
+            <Route path="/dashboard" element={<PageWrapper><Dashboard /></PageWrapper>} />
             
             <Route path="/admin" element={<PageWrapper><Admin /></PageWrapper>} />
             
