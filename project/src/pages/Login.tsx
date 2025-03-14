@@ -3,9 +3,10 @@ import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 
 interface LoginFormData {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -13,21 +14,22 @@ export default function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<LoginFormData>({
-    email: '',
+    username: '',
     password: '',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // Mock login - replace with actual authentication
-      localStorage.setItem('user', JSON.stringify({
-        name: 'Student Name',
-        email: formData.email,
-        courses: [],
-      }));
+      const response = await axios.post('http://127.0.0.1:8000/api/token/', {
+        username: formData.username,
+        password: formData.password,
+      });
+      // Save the access token and refresh token
+      localStorage.setItem('accessToken', response.data.access);
+      localStorage.setItem('refreshToken', response.data.refresh);
       toast.success('Successfully logged in!');
-      navigate('/dashboard');
+      navigate('/admin');
     } catch (error) {
       toast.error('Login failed. Please try again.');
     }
@@ -60,15 +62,15 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email Address
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                username
               </label>
               <div className="mt-1 relative">
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  type="username"
+                  id="username"
+                  name="username"
+                  value={formData.username}
                   onChange={handleChange}
                   className="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
                   required
