@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Upload, Video, Newspaper, Tv, Calendar, BookOpen, BarChart, Trash2 } from "lucide-react";
-// import rasheed from '../assets/rasheed.jpg';
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("overview");
@@ -19,11 +18,40 @@ const Dashboard = () => {
     { id: "magazine", icon: BookOpen, label: "Magazine Content" }
   ];
 
+  // Helper to get the correct image URL for each upload based on activeSection
+  const getImageUrl = (upload: any) => {
+    if (activeSection === "magazine") {
+      // For magazine, the field is 'cover_image'
+      return upload.cover_image;
+    } else {
+      // For other uploads, the field is 'file'
+      return upload.file;
+    }
+  };
+
+  // Helper to display the type or section of the post.
+  const getUploadType = (upload: any) => {
+    if (activeSection === "magazine") {
+      return "Magazine";
+    } else {
+      // Use the section field or capitalize the activeSection if needed
+      return upload.section || activeSection.charAt(0).toUpperCase() + activeSection.slice(1);
+    }
+  };
+
   // Fetch uploads whenever the activeSection changes
   useEffect(() => {
-    // For example, if your API endpoint is /api/upload/ and expects a section parameter:
+    let apiUrl = 'http://127.0.0.1:8000/api/upload/';
+    let params = { section: activeSection };
+
+    if (activeSection === "magazine") {
+      apiUrl = 'http://127.0.0.1:8000/api/magazines/';
+      // For magazines, you might not need the section param since the endpoint returns only magazine posts
+      
+    }
+
     axios
-      .get('http://127.0.0.1:8000/api/upload/', { params: { section: activeSection } })
+      .get(apiUrl, { params })
       .then((response) => {
         setUploads(response.data);
         console.log("Fetched uploads:", response.data);
@@ -32,25 +60,28 @@ const Dashboard = () => {
         console.error("Error fetching uploads:", error);
       });
   }, [activeSection]);
-
+    
   // You can also fetch stats from an API endpoint if available:
   useEffect(() => {
-    // Example: axios.get('/api/stats/').then(...);
     // For now, let's assume these values are updated from API response
     setStats({ totalUploads: 100, activeUsers: 25, pendingApprovals: 5 });
   }, []);
 
   const handleDelete = async (id: number) => {
     try {
-      // Assume all posts are deleted via a common endpoint; adjust if necessary.
-      await axios.delete(`http://127.0.0.1:8000/api/upload/${id}/`);
+      let url = '';
+      if (activeSection === "magazine") {
+        url = `http://127.0.0.1:8000/api/magazine/${id}/`;
+      } else {
+        url = `http://127.0.0.1:8000/api/upload/${id}/`;
+      }
+      await axios.delete(url);
       setUploads((prevUploads) => prevUploads.filter((upload) => upload.id !== id));
     } catch (error) {
       console.error("Error deleting post:", error);
-      // Optionally show a notification here
     }
   };
-
+  
   return (
     <div className="min-h-screen bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -99,12 +130,12 @@ const Dashboard = () => {
                 <li key={upload.id} className="flex items-center justify-between bg-gray-50 p-4 rounded-lg mb-2">
                   <div className="flex items-center gap-4">
                     <img
-                      src={upload.image}
+                      src={getImageUrl(upload)}
                       alt={upload.title}
                       className="w-16 h-16 rounded-lg object-cover"
                     />
                     <span className="text-gray-700 font-medium">
-                      {upload.title} ({upload.type})
+                      {upload.title} ({getUploadType(upload)})
                     </span>
                   </div>
                   <button

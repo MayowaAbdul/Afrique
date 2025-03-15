@@ -8,7 +8,7 @@ interface MagazineIssue {
   date: string;
   summary: string;
   content: string;
-  image: string; // Make sure your API returns this field, or adjust if it's 'cover_image'
+  image: string;
 }
 
 const Magazine = () => {
@@ -27,13 +27,7 @@ const Magazine = () => {
       });
   }, []);
 
-  // Helper function to ensure image URL is absolute
-  const getAbsoluteImageUrl = (url: string): string => {
-    if (url.startsWith('http')) {
-      return url;
-    }
-    return `http://127.0.0.1:8000${url}`;
-  };
+  
 
   return (
     <div className="min-h-screen bg-red-50 py-16">
@@ -45,7 +39,7 @@ const Magazine = () => {
             magazines.map((issue) => (
               <div key={issue.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
                 <img
-                  src={issue.image ? getAbsoluteImageUrl(issue.image) : ''}
+                  src={issue.file}
                   alt={issue.title}
                   className="w-full h-48 object-cover"
                 />
@@ -107,7 +101,7 @@ const Magazine = () => {
                 </div>
 
                 <img
-                  src={selectedIssue.image ? getAbsoluteImageUrl(selectedIssue.image) : ''}
+                  src={selectedIssue.file }
                   alt={selectedIssue.title}
                   className="w-full h-96 object-cover rounded-lg mb-6"
                 />
