@@ -63,11 +63,11 @@ const Login = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                username
+                Username
               </label>
               <div className="mt-1 relative">
                 <input
-                  type="username"
+                  type="text" // Changed type to "text" for username
                   id="username"
                   name="username"
                   value={formData.username}
