@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-export default function Signup() {
+const SignUp = () => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -92,7 +92,7 @@ export default function Signup() {
                   name="username"
                   value={formData.username}
                   onChange={handleChange}
-                  className="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                  className="pl-10 block w-full rounded-md shadow-sm focus:border-primary-500 focus:ring-primary-500 border-black" // Added border-black
                   required
                 />
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -112,7 +112,7 @@ export default function Signup() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                  className="pl-10 block w-full rounded-md shadow-sm focus:border-primary-500 focus:ring-primary-500 border-black" // Added border-black
                   required
                 />
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -132,7 +132,7 @@ export default function Signup() {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="pl-10 pr-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                  className="pl-10 pr-10 block w-full rounded-md shadow-sm focus:border-primary-500 focus:ring-primary-500 border-black" // Added border-black
                   required
                   minLength={8}
                 />
@@ -164,7 +164,7 @@ export default function Signup() {
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="pl-10 pr-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                  className="pl-10 pr-10 block w-full rounded-md shadow-sm focus:border-primary-500 focus:ring-primary-500 border-black" // Added border-black
                   required
                   minLength={8}
                 />
@@ -208,3 +208,5 @@ export default function Signup() {
     </div>
   );
 }
+
+export default SignUp;
