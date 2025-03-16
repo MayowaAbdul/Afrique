@@ -23,8 +23,6 @@ const Navbar = () => {
     { path: '/events', label: 'Events' },
     { path: '/contact', label: 'Contact' },
     { path: '/dashboard', label: 'Dashboard' },
-    {path: '/login', label: 'Login'},
-    {path: '/signup', label: 'SignUp'},
     { path: '/admin', label: 'Admin', className: 'text-red-600 font-bold' }
   ];
 
