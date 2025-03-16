@@ -8,8 +8,16 @@ interface MagazineIssue {
   date: string;
   summary: string;
   content: string;
-  image: string;
+  cover_image: string;  // Updated field name to match backend
 }
+
+// Helper function to get the magazine image URL
+const getImageUrl = (issue: MagazineIssue): string => {
+  if (issue.cover_image && issue.cover_image.startsWith('http')) {
+    return issue.cover_image;
+  }
+  return `http://127.0.0.1:8000${issue.cover_image}`;
+};
 
 const Magazine = () => {
   const [magazines, setMagazines] = useState<MagazineIssue[]>([]);
@@ -27,8 +35,6 @@ const Magazine = () => {
       });
   }, []);
 
-  
-
   return (
     <div className="min-h-screen bg-red-50 py-16">
       <div className="max-w-7xl mx-auto px-4">
@@ -39,7 +45,7 @@ const Magazine = () => {
             magazines.map((issue) => (
               <div key={issue.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
                 <img
-                  src={issue.file}
+                  src={getImageUrl(issue)}
                   alt={issue.title}
                   className="w-full h-48 object-cover"
                 />
@@ -101,7 +107,7 @@ const Magazine = () => {
                 </div>
 
                 <img
-                  src={selectedIssue.file }
+                  src={getImageUrl(selectedIssue)}
                   alt={selectedIssue.title}
                   className="w-full h-96 object-cover rounded-lg mb-6"
                 />

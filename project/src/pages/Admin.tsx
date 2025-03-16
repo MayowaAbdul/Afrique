@@ -78,7 +78,7 @@ const Admin = () => {
         if (!magazineForm.coverImage) {
           throw new Error('Please select a cover image');
         }
-        // Append magazine-specific fields (ensure keys match Django serializer fields)
+
         formData.append('cover_image', magazineForm.coverImage);
         formData.append('title', magazineForm.title);
         formData.append('date', magazineForm.date);

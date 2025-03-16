@@ -34,7 +34,7 @@ const Dashboard = () => {
     if (activeSection === "magazine") {
       return "Magazine";
     } else {
-      // Use the section field or capitalize the activeSection if needed
+      
       return upload.section || activeSection.charAt(0).toUpperCase() + activeSection.slice(1);
     }
   };
@@ -46,7 +46,6 @@ const Dashboard = () => {
 
     if (activeSection === "magazine") {
       apiUrl = 'http://127.0.0.1:8000/api/magazines/';
-      // For magazines, you might not need the section param since the endpoint returns only magazine posts
       
     }
 
