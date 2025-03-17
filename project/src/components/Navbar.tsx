@@ -1,9 +1,7 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import BeamAfrique from '../assets/BeamAfrique.png';
-import { label, path } from 'framer-motion/client';
-
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,18 +11,27 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+
+  const isLoggedIn = Boolean(localStorage.getItem('accessToken'));
+
+
   const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/newsfeed', label: 'Newsfeed' },
-    { path: '/magazine', label: 'Magazine' },
-    { path: '/tv', label: 'TV' },
-    { path: '/gallery', label: 'Photo Gallery' },
-    { path: '/events', label: 'Events' },
-    { path: '/contact', label: 'Contact' },
-    { path: '/dashboard', label: 'Dashboard' },
-    { path: '/admin', label: 'Admin', className: 'text-red-600 font-bold' }
+    { path: '/', label: 'Home', requiresAuth: false },
+    { path: '/about', label: 'About', requiresAuth: false },
+    { path: '/newsfeed', label: 'Newsfeed', requiresAuth: false },
+    { path: '/magazine', label: 'Magazine', requiresAuth: false },
+    { path: '/tv', label: 'TV', requiresAuth: false },
+    { path: '/gallery', label: 'Photo Gallery', requiresAuth: false },
+    { path: '/events', label: 'Events', requiresAuth: false },
+    { path: '/contact', label: 'Contact', requiresAuth: false },
+    { path: '/dashboard', label: 'Dashboard', requiresAuth: true },
+    { path: '/beamadmin', label: 'Admin', requiresAuth: true, className: 'text-red-600 font-bold' }
   ];
+
+  
+  const filteredNavItems = navItems.filter(
+    (item) => !item.requiresAuth || isLoggedIn
+  );
 
   const isActive = (path: string) => {
     if (path === '/' && location.pathname !== '/') return false;
@@ -47,7 +54,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
-            {navItems.map((item) => (
+            {filteredNavItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
@@ -82,7 +89,7 @@ const Navbar = () => {
         } md:hidden`}
       >
         <div className="flex flex-col py-4">
-          {navItems.map((item) => (
+          {filteredNavItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}

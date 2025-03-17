@@ -53,11 +53,11 @@ function App() {
 
             <Route path="/dashboard" element={<PageWrapper><Dashboard /></PageWrapper>} />
 
-            <Route path="/Login" element={<PageWrapper><Login /></PageWrapper>} />
+            <Route path="/beamLogin" element={<PageWrapper><Login /></PageWrapper>} />
 
-            <Route path="/SignUp" element={<PageWrapper><SignUp /></PageWrapper>} />
+            <Route path="/beamSignUp" element={<PageWrapper><SignUp /></PageWrapper>} />
             
-            <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+            <Route path="/beamadmin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
 
             
           </Routes>
