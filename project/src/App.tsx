@@ -13,6 +13,8 @@ import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import Admin from './pages/Admin';
 import ProtectedRoute from './components/ProtectedRoute';
+import Login from './pages/Login'
+import SignUp from './pages/SignUp';
 
 
 // Wrapper component for page transitions
@@ -50,6 +52,10 @@ function App() {
             <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
 
             <Route path="/dashboard" element={<PageWrapper><Dashboard /></PageWrapper>} />
+
+            <Route path="/Login" element={<PageWrapper><Login /></PageWrapper>} />
+
+            <Route path="/SignUp" element={<PageWrapper><SignUp /></PageWrapper>} />
             
             <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
 
