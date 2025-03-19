@@ -57,18 +57,20 @@ const Gallery = () => {
 
         {modalOpen && (
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 flex items-center justify-center">
-            <div className="relative max-w-4xl max-h-screen">
+            <div className="relative max-w-4xl max-h-[90vh]"> {/* Fixed modal height */}
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 text-white text-3xl z-10"
               >
                 &times;
               </button>
-              <img
-                src={images[currentImageIndex]}
-                alt={`Gallery Photo ${currentImageIndex + 1}`}
-                className="max-w-full max-h-full object-contain"
-              />
+              <div className="flex items-center justify-center h-full"> {/* Center image vertically */}
+                <img
+                  src={images[currentImageIndex]}
+                  alt={`Gallery Photo ${currentImageIndex + 1}`}
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4">
                 <button
                   onClick={prevImage}
