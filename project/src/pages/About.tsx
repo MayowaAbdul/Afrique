@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef } from 'react';
 import { Globe2, Users, BookOpen, Map, Building2, Languages } from 'lucide-react';
 import rasheed from '../assets/rasheed.jpg';
 import charles from '../assets/charles.jpg';
@@ -9,47 +10,149 @@ import olasumbo from '../assets/olasumbo.jpg';
 import akunna from '../assets/akunna.jpg';
 import redeit from '../assets/redeit.jpg';
 
+interface FeatureItem {
+  icon?: React.ComponentType<any>;
+  title: string;
+  description: string;
+}
+
+interface FeatureDisplayProps {
+  items: FeatureItem[];
+}
+
+const FeatureDisplay: React.FC<FeatureDisplayProps> = ({ items }) => {
+  const [currentPosition, setPosition] = useState(0);
+  const displayArea = useRef(null);
+
+  useEffect(() => {
+    const changeDisplay = setInterval(() => {
+      setPosition((previousPosition) => (previousPosition + 1) % items.length);
+    }, 5000);
+
+    return () => clearInterval(changeDisplay);
+  }, [items]);
+
+  const advanceDisplay = () => {
+    setPosition((previousPosition) => (previousPosition + 1) % items.length);
+  };
+
+  const reverseDisplay = () => {
+    setPosition((previousPosition) => (previousPosition - 1 + items.length) % items.length);
+  };
+
+  if (!items || items.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="py-16 bg-green-50">
+      <div className="max-w-7xl mx-auto px-4 relative">
+        <div className="overflow-hidden relative" ref={displayArea}>
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${currentPosition * 100}%)` }}
+          >
+            {items.map((item, index) => (
+              <div key={index} className="w-full flex-shrink-0 p-4">
+                <div className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                  {item.icon && <item.icon className="h-12 w-12 text-red-600 mb-4" />}
+                  <h3 className="text-xl font-bold mb-4 text-gray-800">{item.title}</h3>
+                  <p className="text-gray-600">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {items.length > 1 && (
+          <>
+            <button
+              onClick={reverseDisplay}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full hover:bg-gray-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+            <button
+              onClick={advanceDisplay}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full hover:bg-gray-300"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </>
+        )}
+      </div>
+    </section>
+  );
+};
+
 const About = () => {
-  const features = [
+  const features: FeatureItem[] = [
     {
       icon: Globe2,
       title: 'Global Reach',
-      description: 'Connecting Africa to the world through authentic storytelling and journalism.'
+      description: 'Connecting Africa to the world through authentic storytelling and journalism.',
     },
     {
       icon: Users,
       title: 'Pan-African Team',
-      description: 'Our diverse team spans across all regions of Africa and beyond.'
+      description: 'Our diverse team spans across all regions of Africa and beyond.',
     },
     {
       icon: BookOpen,
       title: 'Multilingual Content',
-      description: 'Publishing in English, French, and Chinese to reach a global audience.'
+      description: 'Publishing in English, French, and Chinese to reach a global audience.',
     },
     {
       icon: Map,
       title: 'Continental Coverage',
-      description: 'Comprehensive coverage of all African regions and international news.'
+      description: 'Comprehensive coverage of all African regions and international news.',
     },
     {
       icon: Building2,
       title: 'Strategic Presence',
-      description: 'Offices across Africa, Europe, America, and Asia.'
+      description: 'Offices across Africa, Europe, America, and Asia.',
     },
     {
       icon: Languages,
       title: 'Cultural Bridge',
-      description: 'Fostering understanding between Africa and the global community.'
-    }
+      description: 'Fostering understanding between Africa and the global community.',
+    },
   ];
 
   return (
     <div className="min-h-screen bg-red-50">
       {/* Hero Section */}
-      <section 
+      <section
         className="relative py-20 bg-cover bg-center text-white"
         style={{
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://images.unsplash.com/photo-1447069387593-a5de0862481e?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80")'
+          backgroundImage:
+            'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://images.unsplash.com/photo-1447069387593-a5de0862481e?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80")',
         }}
       >
         <div className="max-w-7xl mx-auto px-4">
@@ -61,19 +164,7 @@ const About = () => {
       </section>
 
       {/* Features Grid */}
-      <section className="py-16 bg-green-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <div key={index} className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-                <feature.icon className="h-12 w-12 text-red-600 mb-4" />
-                <h3 className="text-xl font-bold mb-4 text-gray-800">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FeatureDisplay items={features} />
 
       {/* Mission & Vision */}
       <section className="py-16 bg-red-50">
