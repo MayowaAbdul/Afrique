@@ -39,7 +39,7 @@ const SignUp = () => {
         confirmPassword: '',
       });
       // Redirect to login page
-      navigate('/login');
+      navigate('/beamlogin');
     } catch (error: any) {
       console.error('Signup failed:', error);
       // Display error message from backend if available

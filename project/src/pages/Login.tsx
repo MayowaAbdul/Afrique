@@ -29,7 +29,7 @@ const Login = () => {
       localStorage.setItem('accessToken', response.data.access);
       localStorage.setItem('refreshToken', response.data.refresh);
       toast.success('Successfully logged in!');
-      navigate('/admin');
+      navigate('/beamadmin');
     } catch (error) {
       toast.error('Login failed. Please try again.');
     }
