@@ -22,7 +22,7 @@ const Home = () => {
             />
           </h1>
           <p className="text-2xl mb-8 max-w-2xl">
-            Your Gateway to Africa's Authentic Voice - Connecting the Continent to the World
+          Your Gateway to Africa’s sociocultural history, realities, economic assets, investment opportunities and prospects 
           </p>
           <div className="space-x-4">
             <Link
