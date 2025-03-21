@@ -1,28 +1,28 @@
 import { Link } from 'react-router-dom';
 import BeamAfrique from '../assets/BeamAfrique.png';
-import Article from '../assets/Article.jpg'
+import Article from '../assets/Article.jpg';
 
 const Home = () => {
   return (
     <div className="min-h-screen">
-      {/* Hero Section with Background Image */}
-      <section 
+      {/* Hero Section with Gradient and Animation */}
+      <section
         className="relative h-[80vh] bg-cover bg-center bg-fixed"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80")'
+          backgroundImage: 'url("https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80")',
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-50" />
-        <div className="relative h-full max-w-7xl mx-auto px-4 flex flex-col justify-center text-white">
+        <div className="absolute inset-0 bg-gradient-to-r from-black to-transparent opacity-60" />
+        <div className="relative h-full max-w-7xl mx-auto px-4 flex flex-col justify-center text-white animate__animated animate__fadeIn animate__delay-1s">
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            <img 
-              src={BeamAfrique} 
-              alt="BeamAfrique" 
-              className="h-24 md:h-32 mb-6"
+            <img
+              src={BeamAfrique}
+              alt="BeamAfrique"
+              className="h-24 md:h-32 mb-6 animate__animated animate__zoomIn"
             />
           </h1>
-          <p className="text-2xl mb-8 max-w-2xl">
-          Your Gateway to Africa’s sociocultural history, realities, economic assets, investment opportunities and prospects 
+          <p className="text-2xl mb-8 max-w-2xl animate__animated animate__fadeIn animate__delay-2s">
+            Your Gateway to Africa’s sociocultural history, realities, economic assets, investment opportunities and prospects.
           </p>
           <div className="space-x-4">
             <Link
@@ -44,10 +44,10 @@ const Home = () => {
       {/* Advertisement Section */}
       <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div 
-            className="rounded-lg overflow-hidden relative bg-cover bg-center h-48"
+          <div
+            className="rounded-lg overflow-hidden relative bg-cover bg-center h-48 transition-all transform hover:scale-105 hover:shadow-xl"
             style={{
-              backgroundImage: 'url("https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80")'
+              backgroundImage: 'url("https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80")',
             }}
           >
             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -74,11 +74,14 @@ const Home = () => {
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[1, 2, 3].map((item) => (
-              <div key={item} className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+              <div
+                key={item}
+                className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 hover:shadow-xl transition-all duration-300"
+              >
                 <img
                   src={Article}
                   alt="Story"
-                  className="w-full h-48 object-cover"
+                  className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 text-gray-800">Featured Story {item}</h3>
@@ -99,10 +102,10 @@ const Home = () => {
       </section>
 
       {/* What We Do Section */}
-      <section 
+      <section
         className="py-16 bg-cover bg-center bg-fixed"
         style={{
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80")'
+          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80")',
         }}
       >
         <div className="max-w-7xl mx-auto px-4">
@@ -114,18 +117,18 @@ const Home = () => {
               {
                 title: "Africa's Cultural Voice",
                 description: "We accurately project the rich and diverse culture of Africa to the world.",
-                icon: "🌍"
+                icon: "🌍",
               },
               {
                 title: "Economic Opportunities",
                 description: "Showcasing investment opportunities across the African continent.",
-                icon: "💼"
+                icon: "💼",
               },
               {
                 title: "Global Connection",
                 description: "Building bridges between Africa and the international community.",
-                icon: "🤝"
-              }
+                icon: "🤝",
+              },
             ].map((item, index) => (
               <div
                 key={index}
@@ -140,11 +143,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section 
+      {/* Call to Action Section */}
+      <section
         className="py-16 bg-cover bg-center"
         style={{
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1523365154888-8a758819b722?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80")'
+          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1523365154888-8a758819b722?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80")',
         }}
       >
         <div className="max-w-7xl mx-auto px-4 text-center text-white">
@@ -164,4 +167,4 @@ const Home = () => {
   );
 };
 
-export default Home
+export default Home;
