@@ -10,7 +10,7 @@ interface NewsItem {
   content: string;
   image: string;
   region: string;
-  file: string;
+  file_url: string;
 }
 
 const Newsfeed = () => {
@@ -58,7 +58,7 @@ const Newsfeed = () => {
                 {groupNewsByRegion(region.name).map((news) => (
                   <div key={news.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
                     <img
-                      src={news.file || Article}
+                      src={news.file_url || Article}
                       alt={news.title}
                       className="w-full h-48 object-cover"
                     />

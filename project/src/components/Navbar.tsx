@@ -1,20 +1,31 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, LogOut } from 'lucide-react';
 import BeamAfrique from '../assets/BeamAfrique.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-
+  // Simple auth check
   const isLoggedIn = Boolean(localStorage.getItem('accessToken'));
 
+  // Function to handle logout
+  const handleLogout = () => {
+    // Remove tokens / user info
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    // You may also clear any user-related state here
+    // Redirect to login or home
+    navigate('/tv');
+  };
 
+  // Nav items configuration
   const navItems = [
     { path: '/', label: 'Home', requiresAuth: false },
     { path: '/about', label: 'About', requiresAuth: false },
@@ -28,7 +39,7 @@ const Navbar = () => {
     { path: '/beamadmin', label: 'Admin', requiresAuth: true, className: 'text-red-600 font-bold' }
   ];
 
-  
+  // Filter based on auth
   const filteredNavItems = navItems.filter(
     (item) => !item.requiresAuth || isLoggedIn
   );
@@ -67,6 +78,17 @@ const Navbar = () => {
                 {item.label}
               </Link>
             ))}
+
+            {/* Logout button */}
+            {isLoggedIn && (
+              <button
+                onClick={handleLogout}
+                className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-red-600 transition-all duration-300 transform hover:scale-110"
+              >
+                <LogOut className="w-4 h-4 mr-1" />
+                Logout
+              </button>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -103,6 +125,17 @@ const Navbar = () => {
               {item.label}
             </Link>
           ))}
+
+          {/* Logout for mobile */}
+          {isLoggedIn && (
+            <button
+              onClick={() => { setIsOpen(false); handleLogout(); }}
+              className="mt-4 px-4 py-3 text-sm font-medium flex items-center text-gray-700 hover:text-red-600 hover:bg-gray-50 transition-all duration-300"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Logout
+            </button>
+          )}
         </div>
       </div>
     </nav>

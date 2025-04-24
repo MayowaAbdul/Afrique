@@ -22,10 +22,10 @@ const Dashboard = () => {
   const getImageUrl = (upload: any) => {
     if (activeSection === "magazine") {
       // For magazine, the field is 'cover_image'
-      return upload.cover_image;
+      return upload.cover_image_url;
     } else {
       // For other uploads, the field is 'file'
-      return upload.file;
+      return upload.file_url;
     }
   };
 
