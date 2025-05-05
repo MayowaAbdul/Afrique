@@ -41,11 +41,11 @@ const Dashboard = () => {
 
   // Fetch uploads whenever the activeSection changes
   useEffect(() => {
-    let apiUrl = 'http://127.0.0.1:8000/api/upload/';
+    let apiUrl = 'https://api.beamafrique.com/api/upload/';
     let params = { section: activeSection };
 
     if (activeSection === "magazine") {
-      apiUrl = 'http://127.0.0.1:8000/api/magazines/';
+      apiUrl = 'https://api.beamafrique.com/api/magazines/';
       
     }
 
@@ -70,9 +70,9 @@ const Dashboard = () => {
     try {
       let url = '';
       if (activeSection === "magazine") {
-        url = `http://127.0.0.1:8000/api/magazine/${id}/`;
+        url = `https://api.beamafrique.com/api/magazine/${id}/`;
       } else {
-        url = `http://127.0.0.1:8000/api/upload/${id}/`;
+        url = `https://api.beamafrique.com/api/upload/${id}/`;
       }
       await axios.delete(url);
       setUploads((prevUploads) => prevUploads.filter((upload) => upload.id !== id));

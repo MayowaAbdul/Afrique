@@ -25,7 +25,7 @@ const SignUp = () => {
     }
     try {
       // Send signup data to backend API
-      const response = await axios.post('http://127.0.0.1:8000/api/signup/', {
+      const response = await axios.post('https://api.beamafrique.com/api/signup/', {
         username: formData.username,
         email: formData.email,
         password: formData.password,

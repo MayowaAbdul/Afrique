@@ -28,7 +28,7 @@ const TV = () => {
   useEffect(() => {
     // Fetch TV uploads from your Django backend; ensure your endpoint filters by section=tv.
     axios
-      .get('http://127.0.0.1:8000/api/upload/', { params: { section: 'tv' } })
+      .get('https://api.beamafrique.com/api/upload/', { params: { section: 'tv' } })
       .then((response) => {
         setUploads(response.data);
       })

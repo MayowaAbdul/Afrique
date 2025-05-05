@@ -26,7 +26,7 @@ const Magazine = () => {
   useEffect(() => {
     // Fetch magazine issues from the backend
     axios
-      .get('http://127.0.0.1:8000/api/magazines/')
+      .get('https://api.beamafrique.com/api/magazines/')
       .then((response) => {
         setMagazines(response.data);
       })

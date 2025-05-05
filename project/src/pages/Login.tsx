@@ -21,7 +21,7 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/token/', {
+      const response = await axios.post('https://api.beamafrique.com/api/token/', {
         username: formData.username,
         password: formData.password,
       });

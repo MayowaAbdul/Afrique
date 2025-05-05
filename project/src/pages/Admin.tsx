@@ -87,7 +87,7 @@ const Admin = () => {
   
         // Send the POST request to the magazine endpoint
         const response = await axios.post(
-          'http://127.0.0.1:8000/api/magazine/',
+          'https://api.beamafrique.com/api/magazine/',
           formData
         );
         console.log(response.data);
@@ -114,7 +114,7 @@ const Admin = () => {
   
         // Send the POST request to the generic upload endpoint
         const response = await axios.post(
-          'http://127.0.0.1:8000/api/upload/',
+          'https://api.beamafrique.com/api/upload/',
           formData
          
         );
