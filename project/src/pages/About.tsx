@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Globe2, Users, BookOpen, Map, Building2, Languages } from 'lucide-react';
 import rasheed from '../assets/rasheed.jpg';
+import malika from '../assets/malika.jpg';
+import pierre from '../assets/pierre.jpg';
 import charles from '../assets/charles.jpg';
 import benjamin from '../assets/benja.jpg';
 import rabecca from '../assets/rabecca.jpg';
@@ -244,7 +246,7 @@ const About = () => {
       {[
         {
           name: "RASHEED OLOKODE",
-          role: "Editor-in-Chief",
+          role: "Publisher / Editor-in-Chief",
           image: rasheed,
           location: "Nigerian"
         },
@@ -253,6 +255,24 @@ const About = () => {
           role: "Editor",
           image: charles,
           location: "Zimbabwean"
+        },
+        {
+          name: "OLASUNMBO OJOMU",
+          role: "Associate Publisher/Deputy Editor",
+          image: olasumbo,
+          location: "Nigerian"
+        },
+        {
+          name: "PIERRE NTAKIRUTIMANA",
+          role: "Online Editor",
+          image: pierre,
+          location: "Rwandan"
+        },
+        {
+          name: "MALIKA ABU JNAED",
+          role: "General Manager",
+          image: malika,
+          location: "American"
         },
         {
           name: "BENJAMIN SAKYI",
@@ -267,10 +287,10 @@ const About = () => {
           location: "South African"
         },
         {
-          name: "ADEWALE KAZEEM",
-          role: "Graphics Designer",
-          image: adewale,
-          location: "Nigerian"
+          name: "REDEIT MESHESHA",
+          role: "Bureau Chief",
+          image: redeit,
+          location: "East African"
         },
         {
           name: "DR. ROY MANOHAR",
@@ -279,9 +299,9 @@ const About = () => {
           location: "Indian"
         },
         {
-          name: "OLASUNMBO OJOMU",
-          role: "Associate Publisher/Deputy Editor",
-          image: olasumbo,
+          name: "ADEWALE KAZEEM",
+          role: "Senior Graphics Artist",
+          image: adewale,
           location: "Nigerian"
         },
         {
@@ -290,12 +310,7 @@ const About = () => {
           image: akunna,
           location: "Nigerian"
         },
-        {
-          name: "REDEIT MESHESHA",
-          role: "Bureau Chief",
-          image: redeit,
-          location: "East African"
-        },
+
       ].map((member, index) => (
         <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-xl transition duration-300">
           <img

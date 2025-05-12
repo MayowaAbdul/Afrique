@@ -41,16 +41,25 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4 text-red-400">Contact</h3>
             <ul className="text-gray-300 space-y-2">
               <li className="hover:text-white transition-colors duration-300 hover:translate-x-2">
-                Global HQ: Krobo 1&2, Asafo Adjaye, St.Teshie Tsui Bleoo, Accra - Ghana 
+                Editorial Headquarters: 2A Iyala Street by Shoprite Alausa, Ikeja, Lagos State, Nigeria 
               </li>
               <li className="hover:text-white transition-colors duration-300 hover:translate-x-2">
-                Editorial: Lagos, Nigeria
+                West African Office: Krobo 1&2, Asafo Adjaye St., Teshie Tsui Bleoo, Accra-Ghana
+              </li>
+              <li className="hover:text-white transition-colors duration-300 hover:translate-x-2">
+                South Africa: Plot 33277/917 Kamwala South Lusaka, Zambia.
+              </li>
+              <li className="hover:text-white transition-colors duration-300 hover:translate-x-2">
+                India: 136 Tent Lines,Roy Villa,Mohan Nagar, Nagpur Maharashtra, India 440001
+              </li>
+              <li className="hover:text-white transition-colors duration-300 hover:translate-x-2">
+                United Kingdom: United States of America, 178502 s Cottage Grove , Chicago IL
               </li>
               <li className="hover:text-white transition-colors duration-300 hover:translate-x-2">
                 Email: beamafrique@gmail.com
               </li>
               <li className="hover:text-white transition-colors duration-300 hover:translate-x-2">
-                Phone: +233244566067/ +233262422070
+                Phone: +2348076094066/ +233244566067/ +233262422070
               </li>
             </ul>
           </div>
