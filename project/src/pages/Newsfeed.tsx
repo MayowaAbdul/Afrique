@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
-import lazarus from '../assets/lazarus.jpg';
+import hon from '../assets/hon.jpg';
+import nana from '../assets/nana.jpg';
+import abdel from '../assets/abdel.jpg';
 
 const regions = [
   'West Africa',
@@ -18,7 +20,7 @@ const articles = [
     id: 1,
     title: 'Malawi: Opposition Political Party, Police Authorities and Ambassadors of Peace Condemn Political Violence',
     region: 'South Africa',
-    image: lazarus,
+    image: hon,
     excerpt: 'Opposition Political Party, Police Authorities',
     date: '2025-05-13',
     content: `The Malawian main opposition party, the Democratic Progressive Party (DPP); an NGO, the International Ambassadors of Peace Network; and the Malawian Police authorities have separately condemned the recent political violence incident in Malawi. 
@@ -52,6 +54,45 @@ It is noteworthy that the the International Ambassadors of Peace Network under t
 `,
     author: 'Rasheed Olokode',
     tags: ['Politics', 'World', 'Malawi']
+  },
+    {
+    id: 2,
+    title: 'Ghana to celebrate the Cedi @ 60 in Grand Style',
+    region: 'West Africa',
+    image: nana,
+    excerpt: 'CEDI@ 60',
+    date: '2025-05-13',
+    content: `It is no news that the Cedi was adopted as the official currency of Ghan 60 years ago., what is however newsworthy is the planned celebration of this national milestone with pomp and pageantry by the West African Nation globally reputed  as the hub of gold in Africa, Ghana.
+According to Graphic Online, a Ghanaian news site, the Bank of Ghana has unveiled a series of grand events scheduled to hold nationwide, between July and December 2025 to commemorate this epochal feat. .
+According to the report, this plan was contained in a Press Statement, dated May 13, 2025 and signed by the Bank’s Secretary, Ms Sandra Thompson, the Cedi is an enduring symbol of Ghana’s economic independence and progress over the past six decades.
+The commemorative activities, according to the official document, will include official launches, public exhibitions, educational campaigns, and fora involving stakeholders across the country. The package also includes a platform to engage the public on the importance of monetary stability and the use of digital financial tools.
+The statement reiterates that the sixty-year old currency had undergone several changes in form and policy direction to cater for Ghana’s changing economic needs at varying times, while describing it as a reflection of the country’s resilient efforts to attain a stable and inclusive economy.
+“This anniversary offers an opportunity for Ghanaians to reflect on the history of the Cedi, to celebrate the progress made, and to reaffirm our collective responsibility to protect the value and integrity of the currency,” the Statement states.
+The Bank of Ghana reaffirms its goal of maintaining a stable Cedi as part of its broader role in managing inflation and protecting the value of the national currency.
+The Cedi was introduced on July 19, 1965, replacing the Ghanaian Pound as the country’s sole legal tender.
+`,
+    author: 'Rasheed Olokode',
+    tags: ['Celebration', 'World', 'Ghana']
+  },
+      {
+    id: 3,
+    title: 'Egypt Recovers 25 Rare Smuggled Artifacts',
+    region: 'North Africa',
+    image: abdel,
+    excerpt: 'Egypt Recovers Rare Artifacts',
+    date: '2025-05-13',
+    content: `The Egyptian Foreign Affairs Ministry has recovered 25 Egyptian antiques that had been hitherto looted and smuggled out of the North African Country.
+This positive development was disclosed by Egypt’s Emigration and Expatriates Minister, Badr Abdelatty, who said that they were recovered through the Egyptian Consulate General in New York
+According to Abdelatty, these repatriated artifacts, which date back to various eras of ancient Egyptian civilization, are distinguished by their great historical and artistic value.
+He described the success as the end result of the Committee for the Recovery of Smuggled Antiquities, formed by the Ministry of Foreign Affairs and the Ministry of Tourism and Antiquities.
+While emphasizing the importance Egypt attaches to the retrieval of smuggled Egyptian antiquities, the elated Minister commended the tireless efforts of Egyptian embassies and consulates abroad, in conjunction with the Ministry of Tourism and Antiquities, the Egyptian General Prosecutor's Office, and relevant state agencies, to recover the artifacts.
+The recovered collection includes stone and wooden coffin lids, funerary masks made of pottery and gilded wood, a large alabaster vessel, and a portrait of a woman from the city of Fayum, reflecting the mastery of realistic portraiture during the Greco-Roman era.
+There were also various pieces of jewelry made of various metals, a rare gold coin dating back to the reign of Ptolemy I, and small bronze and stone statues depicting aspects of Egyptian belief and art from various historical periods.
+The return of the artifacts was the result of a joint effort between the Egyptian Consulate General in New York, the New York City District Attorney's Office, and US security agencies, as well as lengthy negotiations with several individual owners of these artifacts, with support from the Cultural Sector of the Ministry of Foreign Affairs.
+
+`,
+    author: 'Rasheed Olokode',
+    tags: ['Artifacts', 'World', 'Egypt']
   },
 ];
 
