@@ -19,7 +19,7 @@ const Newsfeed = () => {
 
   //  news items from  backend
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/upload/', { params: { section: 'news' } })
+    axios.get('https://api.beamafrique.com/api/upload/', { params: { section: 'news' } })
       .then(response => {
         setNewsItems(response.data);
       })
