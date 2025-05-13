@@ -1,119 +1,188 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import Article from '../assets/Article.jpg';
+import { useState } from 'react';
+import { X } from 'lucide-react';
+import lazarus from '../assets/lazarus.jpg';
 
-interface NewsItem {
-  id: number;
-  title: string;
-  date: string;
-  summary: string;
-  content: string;
-  image: string;
-  region: string;
-  file_url: string;
-}
+const regions = [
+  'West Africa',
+  'East Africa',
+  'North Africa',
+  'South Africa',
+  'Central Africa',
+  'Asia',
+  'Europe',
+  'America'
+];
 
-const Newsfeed = () => {
-  const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
-  const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
+const articles = [
+  {
+    id: 1,
+    title: 'Malawi: Opposition Political Party, Police Authorities and Ambassadors of Peace Condemn Political Violence',
+    region: 'South Africa',
+    image: lazarus,
+    excerpt: 'Opposition Political Party, Police Authorities',
+    date: '2025-05-13',
+    content: `The Malawian main opposition party, the Democratic Progressive Party (DPP); an NGO, the International Ambassadors of Peace Network; and the Malawian Police authorities have separately condemned the recent political violence incident in Malawi. 
 
-  //  news items from  backend
-  useEffect(() => {
-    axios.get('https://api.beamafrique.com/api/upload/', { params: { section: 'news' } })
-      .then(response => {
-        setNewsItems(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching news items:', error);
-      });
-  }, []);
+It will be recalled that on Sunday, May 11 2025, a violent attack against some supporters of the Country’s main opposition party, the Democratic Progressive Party (DPP), allegedly occurred at the Mponela Town in the Dowa District of the Malawian Capital.
 
-  // Group news items by region
-  const regions = [
-    { name: 'West Africa', color: 'red' },
-    { name: 'East Africa', color: 'green' },
-    { name: 'North Africa', color: 'red' },
-    { name: 'South Africa', color: 'green' },
-    { name: 'Central Africa', color: 'red' },
-    { name: 'Asia', color: 'green' },
-    { name: 'Europe', color: 'red' },
-    { name: 'America', color: 'green' },
-  ];
+According to a report by the Malawian Freedom Network, a mini bus transporting a group of the DPP supporters from a political rally addressed by the Country’s former Vice President for the Central Region, Alfred Gangata, was attacked and set ablaze by some gunmen, resulting in some serious injuries. 
+In a swift response, the DPP, speaking through a public statement by the Leader of the Opposition in the Parliament, George T. Chaponda, vigorously berated the incident as “…not only barbaric…but also utterly unacceptable…”. 
+Chaponda, who is also a career diplomat, in the statement, noted that the “…Mponela is fast becoming a chilling symbol of political terror…” while asserting that “the violence is not isolated,,,” but a systematic one consciously staged “…to instill fears in the hearts of opposition supporters, to silence dissent, and to weaken democratic engagement, as we approach the September 16, 2025 General Elections”.
+He charged the Malawian Police Service to “rise above mere verbal condemnation and take swift concrete action”, and also requested the international community and diplomatic corps in Malawi to step up their monitoring and stakeholder engagement responsibilities in a bid “to ensure that peace, tolerance and the rule of law prevail”.
+And, in a more poignant manner, the DPP has called out the current Malawian ruling Party, the Malawi Congress Party (MCP). 
+In a trending social media video, the DPP Youth Director accuses the MCP youths of orchestrating the attack, alleging that the ruling party is targeting opposition members through violence.
+According to a report by Nyasa Times, the MCP has swiftly countered the claims via its Deputy Publicity Secretary, Ken Msonda. 
+Msonda was quoted as saying that the MCP is "unfazed" by the plethora of accusations, vowing that his Party “…stands by democratic values and has no motive to harm anyone”.
+Furthermore, he suggested that the incident might have been staged by the DPP  “…as a political smear tactic to damage the ruling party's image”, while calling on the Malawi Police “…to break their silence and conduct a full investigation into the matter”.
+In its own response, the Malawi Police Service (MPS), in a terse press statement, dated 12th May 2025,  “…strongly condemns acts of politically motivated violence that took place at the Mponela Trading Centre in Dowa…”. 
+In the document signed by Mr. Peter Kalaya, an Assistant Commissioner of Police and the Service Public Relation Officer, the Service disclosed that it has “…launched investigations into the incident to bring to book those responsible…” while urging political parties to “…refrain from open provocations and promote peaceful co-existence”.
+Finally, the Service "…reaffirms its commitment to maintaining law and order and calls on all political parties to honour their pledge of peace made ahead of the campaign period”.    
 
-  const groupNewsByRegion = (region: string): NewsItem[] =>
-    newsItems.filter(news => news.region === region);
+International Ambassadors of Peace Network Promptly Responds
+Similarly, the International Ambassadors of Peace Network has lend its weighty voice to the widespread condemnation of the unfortunate Mponela incident.
+In an emergency meeting convened to address the latest breach of the peace in the Southeastern African Nation, the Network, in its characteristics peace advocacy and mediation antidotes to global crises, strongly denounced political violence as an abomination in human societies.
+In his keynote address, Abukari Inbrana, the Global Ambassador of Peace, in unequivocal terms, repudiated the status and realities of violence, describing it as “an act of violation of basic human rights…” which “…should not be appreciated”. 
+And, why should political violence not be appreciated or patronized? Abdul Ibrahim , the Organization’s Director of International Relations, provided the answer during the peace advocacy meeting. 
+In his words,  “Elections will come and go; power will come and go too; but putting the Country first should be the main intention of development of basic human values”.
+That was not all. The patriotism pill prescribed by Ibrahim found befitting complement in the submissions of his Colleague, Ms Mariam Botwey, the Director of Women and Child Development of the global Champion of Peace Organization. 
+Botwey  urged the political parties “…to put politics aside and concentrate on the impact that the political fraternity will give to the future of Malawi youth children and women”.
+She reasoned that “…the youth and children are the future residents of a country…” who must not be exposed or subjected to violence in their budding days.
+About female folks, she averred that “women are an integral part of every society and if violence prevails then it becomes difficult for women to contribute towards the growth of the family and the country at large”.
+It is noteworthy that the the International Ambassadors of Peace Network under the headship of Abukari Inbrana has become globally reputed for such proactive steps as its latest Malawi efforts. Its past epochal efforts and feats in Central America’s Belize. Africa’s Botswana, Mauritius, Mozambique, Namibia, Tunisia, South Africa and Ghana will ever remain indelible in global history.
+`,
+    author: 'Rasheed Olokode',
+    tags: ['Politics', 'World', 'Malawi']
+  },
+];
+
+function Newsfeed() {
+  const [selectedRegion, setSelectedRegion] = useState('All');
+  const [selectedArticle, setSelectedArticle] = useState<typeof articles[0] | null>(null);
+
+  const filteredArticles = selectedRegion === 'All'
+    ? articles
+    : articles.filter(article => article.region === selectedRegion);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
-      <div className="max-w-7xl mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center mb-12">Latest News</h1>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">Latest News</h1>
+
+      {/* Region Filter */}
+      <div className="mb-8">
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={() => setSelectedRegion('All')}
+            className={`px-4 py-2 rounded-full ${
+              selectedRegion === 'All'
+                ? 'bg-green-700 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            All
+          </button>
           {regions.map((region) => (
-            <div key={region.name} className="mb-8">
-              <h2 className={`text-xl font-bold mb-6 text-${region.color}-600 border-b-2 border-${region.color}-600 pb-2`}>
-                {region.name}
+            <button
+              key={region}
+              onClick={() => setSelectedRegion(region)}
+              className={`px-4 py-2 rounded-full ${
+                selectedRegion === region
+                  ? 'bg-green-700 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              {region}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Articles Grid */}
+      <div className="grid md:grid-cols-2 gap-8">
+        {filteredArticles.map((article) => (
+          <article key={article.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <img
+              src={article.image}
+              alt={article.title}
+              className="w-full aspect-video object-cover object-center"
+            />
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm text-green-700 font-medium">{article.region}</span>
+                <span className="text-sm text-gray-500">{article.date}</span>
+              </div>
+              <h2 className="text-xl font-bold text-gray-900 mb-2">{article.title}</h2>
+              <p className="text-gray-600 mb-4">{article.excerpt}</p>
+              <button 
+                onClick={() => setSelectedArticle(article)}
+                className="text-green-700 font-medium hover:text-green-800"
+              >
+                Read More →
+              </button>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      {/* Article Modal */}
+      {selectedArticle && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="relative">
+              <img
+                src={selectedArticle.image}
+                alt={selectedArticle.title}
+                className="w-full aspect-video object-cover object-center"
+              />
+              <button
+                onClick={() => setSelectedArticle(null)}
+                className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100"
+              >
+                <X className="w-6 h-6 text-gray-600" />
+              </button>
+            </div>
+            
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+                  {selectedArticle.region}
+                </span>
+                <span className="text-gray-500 text-sm">{selectedArticle.date}</span>
+              </div>
+              
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                {selectedArticle.title}
               </h2>
-              <div className="space-y-6">
-                {groupNewsByRegion(region.name).map((news) => (
-                  <div key={news.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-                    <img
-                      src={news.file_url || Article}
-                      alt={news.title}
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="p-4">
-                      <span className="text-sm text-gray-500">{news.date}</span>
-                      <h3 className="text-lg font-semibold mt-2 mb-2">{news.title}</h3>
-                      <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-                        {news.summary}
-                      </p>
-                      <button 
-                        onClick={() => setSelectedNews(news)}
-                        className={`text-${region.color}-600 text-sm font-semibold hover:text-${region.color}-700`}
-                      >
-                        Read More →
-                      </button>
-                    </div>
-                  </div>
+              
+              <div className="flex items-center mb-6">
+                <div>
+                  <p className="text-gray-700 font-medium">By {selectedArticle.author}</p>
+                </div>
+              </div>
+
+              <div className="prose max-w-none">
+                {selectedArticle.content.split('\n\n').map((paragraph, index) => (
+                  <p key={index} className="text-gray-600 mb-4">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-2">
+                {selectedArticle.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                  >
+                    #{tag}
+                  </span>
                 ))}
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Modal */}
-        {selectedNews && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="p-6">
-                <img
-                  src={selectedNews.image || Article}
-                  alt={selectedNews.title}
-                  className="w-full h-64 object-cover rounded-lg mb-4"
-                />
-                <div className="text-sm text-gray-500 mb-2">{selectedNews.date}</div>
-                <h2 className="text-2xl font-bold mb-4">{selectedNews.title}</h2>
-                <div className="prose max-w-none">
-                  {selectedNews.content.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="mb-4 text-gray-700 leading-relaxed">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-                <button
-                  onClick={() => setSelectedNews(null)}
-                  className="mt-6 bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition duration-300"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
-};
+}
 
 export default Newsfeed;
