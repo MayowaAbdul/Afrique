@@ -3,6 +3,9 @@ import { X } from 'lucide-react';
 import hon from '../assets/hon.jpg';
 import nana from '../assets/nana.jpg';
 import abdel from '../assets/abdel.jpg';
+import kenya from '../assets/kenya.jpg';
+import travel from '../assets/travel.jpg';
+import camsea from '../assets/camsea.jpg';
 
 const regions = [
   'West Africa',
@@ -93,6 +96,68 @@ The return of the artifacts was the result of a joint effort between the Egyptia
 `,
     author: 'Rasheed Olokode',
     tags: ['Artifacts', 'World', 'Egypt']
+  },
+ {
+    id: 4,
+    title: 'Kenya, Dominican Republic Sign Agreement to Support Security Mission in Haiti',
+    region: 'East Africa',
+    image: kenya,
+    excerpt: 'Kenya and the Dominican Republic have signed a bilateral agreement aimed at boosting the current security mission in Haiti. ',
+    date: '2025-06-13',
+    content: ` The deal, which was signed on Monday, 12th May 2025, is a package of assistance to the Kenyan police participating in a UN-backed Multinational Security Support Mission.
+The Multinational Security Support (MSS) Mission in Haiti is an international police and military force approved by the United Nations Security Council on 2nd October 2023 to assist the government of Haiti in restoring law and order amid worsening civil strife and gang violence since 2018. 
+The mission is led by Kenya and coordinated with the Haitian National Police; though backed by the UNSC, it is not a United Nations operation.
+For Kenya, Musalia Mudavadi, the East African Nation’s First Cabinet Secretary and Foreign Secretary signed the deal while Foreign Minister Roberto Alvarez appended his signature.
+The deal would ensure that Kenyan police receive both medical and repatriation support in case of emergencies.
+Haiti’s National Police, bolstered by a U.N.-backed mission led by Kenyan police, has struggled in its fight against gangs as the mission remains underfunded and understaffed, with only 1,000 personnel of the 2,500 envisioned.
+Kenyan police have constantly come under attack, with a few casualties reported.
+Gangs that control at least 85% of Port-au-Prince have launched recent attacks on previously peaceful areas that police and armed residents are trying to protect.
+More than 5,600 people were killed in Haiti last year, with gang violence leaving more than one million people homeless. In February and March alone, 1,086 people were killed and 383 injured, according to the U.N.`,
+    author: 'Rasheed Olokode',
+    tags: ['Security', 'World', 'Kenya']
+  },
+   {
+    id: 5,
+    title: 'Africas Travel Indaba 2025 kicks off in South Africa',
+    region: 'East Africa',
+    image: travel,
+    excerpt: 'Africas Travel Indaba ',
+    date: '2025-06-13',
+    content: ` JOHANNESBURG, May 13 -- Africa's Travel Indaba 2025 officially kicked off with pomp and pageantry in South Africa on Tuesday.
+An iconic African leisure trade show, the Africa’s Travel Indaba is owned and organized by South African Tourism with the main objective of creating market access to South Africa’ vast array of tourism products.  
+The 2025 edition, a three-day event (May 13 – 15), themed Unlimited Africa, hosts some 1,300 exhibitors and 1,200 buyers from 55 countries, with a focus on promoting inter-African travel and breaking down barriers. 
+The opening ceremony, graced by the crème-de-la-crème of the South African Nation and of the global tourism held industry, held in the Coastal City of Durban, KwaZulu-Natal
+At the event, South Africa’s Deputy President, Paul Mashatile, called for collective action to promote sustainable tourism across the African continent, as he highlighted Africa's rich cultural heritage and economic opportunities in the tourism sector.
+Tourism, according to him, is projected to contribute 10.4 percent to Africa's gross domestic product (GDP) by 2030, up from the current 6.8 percent. In South Africa alone, tourism currently contributes 8.9 percent to the GDP and supports 1.68 million jobs, with plans to increase this to over two million by 2030.
+Mashatile, however, acknowledged challenges facing the continent, including political strife, poverty, unemployment, and inequality, which have led to widespread hardship and violence.
+"These issues require our collective action. This gathering must confront these challenges and uncover enduring solutions. Africa can overcome any obstacle that stands in her path. However, the key to overcoming lies in our ability to work together," he said.
+Having emphasized the universal roles of tourism as a significant economic engine, a catalyst for social change and a cornerstone of inclusive growth, he proceeded to state the core essence of the annual South Africa’s tourism festival.  
+"Therefore, Africa's Travel Indaba stands as a beacon of what is possible when we act together. It reminds us that tourism is not just about travel -- it is about connection, empowerment, and shared belief. It is about promoting each other's markets and harnessing what we have as diverse nations," he said.
+"This gathering and those that follow ought to act as sparks for greater regional cooperation, enabling African nations to present themselves together as diverse yet unified destinations," he added.
+By prescribing the integration of technologies, innovation, and sustainable practices into the tourism strategies, the Gerhardsville-born former anti-Apartheid activist unveiled the South African Government’s recipe for a better tomorrow.
+"We need to invest more in skills development and digital transformation for the tourism sector to thrive. We must foster innovation and sustainable practices to ensure long-term economic growth," Mashatile stated.
+"Let us celebrate the bond that unites Africa, honoring the vibrant cultures, breathtaking landscapes, and the incredible people that make this continent shine with brilliance," he concluded. "Let us demonstrate to the world that Africa is ready for business." Enditem
+`,
+    author: 'Rasheed Olokode',
+    tags: ['Sports', 'Africa', 'World']
+  },
+  {
+    id: 6,
+    title: 'Cameroon Opens Sea Port',
+    region: 'East Africa',
+    image: camsea,
+    excerpt: 'Cameroon’s 2nd Phase of Deep Seaport Opens for Operation',
+    date: '2025-06-13',
+    content: ` YAOUNDE, May 9 — Cameroonian authorities on Friday inaugurated the second phase of Kribi Deep Seaport in the southern part of the country, noting that the new maritime facility opens a new vista of economic development for the Central African nation.
+Constructed by the China Harbor Engineering Company Ltd. (CHEC), the Kribi Deep Seaport is the first deep seaport in Cameroon and the biggest in the Central Africa region.
+To mark the inauguration, MSC Turkiye, one of the world’s largest container ships with a capacity of 24,346 TEU, docked at the port on the eve of the occasion.
+“The start of operation for the second phase of Kribi Deep Seaport opens a new era for our economic growth. The structural transformation of our economic is a major challenge. For the government, Kribi seaport was constructed for a decisive step for the industrialization of Cameroon,” said Cameroon’s Minister of Transport Jean Ernest Massena Ngalle Bibehe who attended the ceremony.
+This photo taken on May 9, 2025 shows MSC Türkiye, one of the world’s largest container ships with a capacity of 24,346 TEU, docking at the Kribi Deep Seaport for the commissioning ceremony of the second phase of the port, in Kribi, Cameroon.He said that the port had become indispensable in improving the competitiveness of companies in the country and is now a reference in the Gulf of Guinea.
+“The Kribi Deep Seaport stands as one of the flagship projects of China-Cameroon cooperation and serves as a model for China-Africa collaboration under the Belt and Road Initiative. The first phase container berth has already surpassed its designed capacity,” said Chen Ze, general manager of CHEC Central Africa Division said while addressing dignitaries at the occasion.
+The first phase of the port became operational in 2018, giving a boost to the country’s economy, while construction of the second phase began in 2019. 
+Culled from cameroononline.org`,
+    author: 'Rasheed Olokode',
+    tags: ['Transport', 'Cameroon', 'World']
   },
 ];
 
