@@ -103,7 +103,7 @@ The return of the artifacts was the result of a joint effort between the Egyptia
     region: 'East Africa',
     image: kenya,
     excerpt: 'Kenya and the Dominican Republic have signed a bilateral agreement aimed at boosting the current security mission in Haiti. ',
-    date: '2025-06-13',
+    date: '2025-05-13',
     content: ` The deal, which was signed on Monday, 12th May 2025, is a package of assistance to the Kenyan police participating in a UN-backed Multinational Security Support Mission.
 The Multinational Security Support (MSS) Mission in Haiti is an international police and military force approved by the United Nations Security Council on 2nd October 2023 to assist the government of Haiti in restoring law and order amid worsening civil strife and gang violence since 2018. 
 The mission is led by Kenya and coordinated with the Haitian National Police; though backed by the UNSC, it is not a United Nations operation.
@@ -122,7 +122,7 @@ More than 5,600 people were killed in Haiti last year, with gang violence leavin
     region: 'East Africa',
     image: travel,
     excerpt: 'Africas Travel Indaba ',
-    date: '2025-06-13',
+    date: '2025-05-13',
     content: ` JOHANNESBURG, May 13 -- Africa's Travel Indaba 2025 officially kicked off with pomp and pageantry in South Africa on Tuesday.
 An iconic African leisure trade show, the Africa’s Travel Indaba is owned and organized by South African Tourism with the main objective of creating market access to South Africa’ vast array of tourism products.  
 The 2025 edition, a three-day event (May 13 – 15), themed Unlimited Africa, hosts some 1,300 exhibitors and 1,200 buyers from 55 countries, with a focus on promoting inter-African travel and breaking down barriers. 
@@ -147,7 +147,7 @@ By prescribing the integration of technologies, innovation, and sustainable prac
     region: 'East Africa',
     image: camsea,
     excerpt: 'Cameroon’s 2nd Phase of Deep Seaport Opens for Operation',
-    date: '2025-06-13',
+    date: '2025-05-13',
     content: ` YAOUNDE, May 9 — Cameroonian authorities on Friday inaugurated the second phase of Kribi Deep Seaport in the southern part of the country, noting that the new maritime facility opens a new vista of economic development for the Central African nation.
 Constructed by the China Harbor Engineering Company Ltd. (CHEC), the Kribi Deep Seaport is the first deep seaport in Cameroon and the biggest in the Central Africa region.
 To mark the inauguration, MSC Turkiye, one of the world’s largest container ships with a capacity of 24,346 TEU, docked at the port on the eve of the occasion.
