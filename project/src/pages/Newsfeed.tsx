@@ -6,6 +6,7 @@ import abdel from '../assets/abdel.jpg';
 import kenya from '../assets/kenya.jpg';
 import travel from '../assets/travel.jpg';
 import camsea from '../assets/camsea.jpg';
+import staff from '../assets/staff.jpg';
 
 const regions = [
   'West Africa',
@@ -158,6 +159,34 @@ The first phase of the port became operational in 2018, giving a boost to the co
 Culled from cameroononline.org`,
     author: 'Rasheed Olokode',
     tags: ['Transport', 'Cameroon', 'World']
+  },
+    {
+    id: 7,
+    title: 'Nigerian-British Lady emerges as UK’s Youngest Mayor',
+    region: 'West Africa',
+    image: staff,
+    excerpt: 'Youngest Female Mayor',
+    date: '2025-05-18',
+    content: ` A 29 year-old Nigerian-British, Princess Opeyemi Bright, has set a world record on the political terrain of the United Kingdom, as she got elected and inaugurated as the Mayor of the London Borough of Barking and Dagenham. 
+This epoch development, undoubtedly a historical moment for Nigerians in the Diaspora, the Nigerian Nation, Africa in general and youth leadership globally, was officially celebrated via the inauguration which took place on Friday, May 16, 2025. 
+Born in Homerton Hospital and a resident of Barking and Dagenham, Opeyemi was previously elected as a Councilor in 2018 at just 22 years old. Before then, she had served as a school governor, a board member of Agile Africa, an NGO that equips young people with tech skills,  being a passionate mentor to aspiring leaders and professionals. In her spare time, she enjoys cooking, teaching, creating contents and hosting career webinars for youth in Nigeria.
+
+She succeeds Moin Quadri, who served with distinction over the past year in an office that is one of the Borough’s oldest and most cherished roles, with a rich history of representing the Borough’s heritage, values, and community spirit.
+
+
+As Mayor, Opeyemi will act as an ambassador for Barking and Dagenham, celebrating its diversity, promoting local initiatives, and strengthening community bonds.
+
+In her inaugural address, she shared her vision of civic leadership grounded in inclusivity, pride, and community service: “I believe in the power of community, the importance of tradition, and the need to inspire pride in the place we all call home. As Civic Mayor, I am committed to being a voice that uplifts our Borough — honouring local heroes, supporting charities, and forging deeper connections with residents, schools, and businesses.”
+
+
+A former director at four different top companies including the May & Baker Eastbrook Community Club Limited, this youngest Mayor in the history of the UK so far, brings a wealth of experience in community engagement and public service. Her longstanding work with grassroots organizations reflects a deep understanding of the Borough’s needs, as well as a passion for creating positive change.
+“This is nothing short of God’s grace,” a highly elated Opeyemi said during her inauguration.  “I’m proud to serve my Borough, and as a proud Nigerian, I will represent my heritage with humility and excellence. May this journey inspire others to lead, serve, and rise.”
+
+It is noteworthy that Opeyemi’s political journey began early. Elected as a councilor at just 22, she has spent the last seven years championing youth empowerment, social inclusion, and economic opportunities within her Borough. Her dedication to service is deeply rooted in her upbringing.
+
+`,
+    author: 'Rasheed Olokode',
+    tags: ['Politics', 'United Kingdom', 'World']
   },
 ];
 
