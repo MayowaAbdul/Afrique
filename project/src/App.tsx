@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
+import NewsArticle from './pages/NewsArticle';
 import Newsfeed from './pages/Newsfeed';
 import Magazine from './pages/Magazine';
 import TV from './pages/TV';
@@ -40,6 +41,8 @@ function App() {
             <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
             
             <Route path="/newsfeed" element={<PageWrapper><Newsfeed /></PageWrapper>} />
+
+            <Route path="/news/:id" element={<PageWrapper><NewsArticle /></PageWrapper>} />
             
             <Route path="/magazine" element={<PageWrapper><Magazine /></PageWrapper>} />
             

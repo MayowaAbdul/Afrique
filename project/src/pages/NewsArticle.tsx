@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { Link } from 'lucide-react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import hon from '../assets/hon.jpg';
 import nana from '../assets/nana.jpg';
 import abdel from '../assets/abdel.jpg';
@@ -7,17 +8,16 @@ import kenya from '../assets/kenya.jpg';
 import travel from '../assets/travel.jpg';
 import camsea from '../assets/camsea.jpg';
 import staff from '../assets/staff.jpg';
-
-const regions = [
-  'West Africa',
-  'East Africa',
-  'North Africa',
-  'South Africa',
-  'Central Africa',
-  'Asia',
-  'Europe',
-  'America'
-];
+import { 
+  FacebookShareButton, 
+  TwitterShareButton, 
+  LinkedinShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+  WhatsappIcon
+} from 'react-share';
 
 const articles = [
   {
@@ -190,74 +190,163 @@ It is noteworthy that Opeyemi’s political journey began early. Elected as a co
   },
 ];
 
-function Newsfeed() {
-  const [selectedRegion, setSelectedRegion] = useState('All');
+interface Comment {
+  id: number;
+  author: string;
+  content: string;
+  date: string;
+}
 
-  const filteredArticles = selectedRegion === 'All'
-    ? articles
-    : articles.filter(article => article.region === selectedRegion);
+function NewsArticle() {
+  const { id } = useParams<{ id: string }>();
+  const article = articles.find(a => a.id === Number(id));
+  const [liked, setLiked] = useState(false);
+  const [likes, setLikes] = useState(0);
+  const [showShareMenu, setShowShareMenu] = useState(false);
+  const [comment, setComment] = useState('');
+  const [comments, setComments] = useState<Comment[]>([]);
+
+  if (!article) {
+    return <div className="text-center py-12">Article not found</div>;
+  }
+
+  const handleLike = () => {
+    setLiked(!liked);
+    setLikes(liked ? likes - 1 : likes + 1);
+  };
+
+  const handleComment = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!comment.trim()) return;
+
+    const newComment: Comment = {
+      id: comments.length + 1,
+      author: 'Anonymous User',
+      content: comment,
+      date: new Date().toISOString()
+    };
+
+    setComments([...comments, newComment]);
+    setComment('');
+  };
+
+  const shareUrl = window.location.href;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-4xl font-bold text-gray-900 mb-8">Latest News</h1>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <img
+        src={article.image}
+        alt={article.title}
+        className="w-full h-96 object-cover rounded-lg mb-8"
+      />
 
-      {/* Region Filter */}
       <div className="mb-8">
-        <div className="flex flex-wrap gap-2">
+        <div className="flex items-center gap-4 mb-4">
+          <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+            {article.region}
+          </span>
+          <span className="text-gray-500">{article.date}</span>
+        </div>
+
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">{article.title}</h1>
+        <p className="text-gray-700 font-medium">By {article.author}</p>
+      </div>
+
+      <div className="prose max-w-none mb-8">
+        {article.content.split('\n\n').map((paragraph, index) => (
+          <p key={index} className="text-gray-600 mb-4">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+
+      <div className="flex items-center gap-6 mb-8 border-t border-b py-4">
+        <button
+          onClick={handleLike}
+          className={`flex items-center gap-2 ${liked ? 'text-red-500' : 'text-gray-500'}`}
+        >
+          <Heart className={`w-6 h-6 ${liked ? 'fill-current' : ''}`} />
+          <span>{likes} Likes</span>
+        </button>
+
+        <button className="flex items-center gap-2 text-gray-500">
+          <MessageCircle className="w-6 h-6" />
+          <span>{comments.length} Comments</span>
+        </button>
+
+        <div className="relative">
           <button
-            onClick={() => setSelectedRegion('All')}
-            className={`px-4 py-2 rounded-full ${
-              selectedRegion === 'All'
-                ? 'bg-green-700 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
+            onClick={() => setShowShareMenu(!showShareMenu)}
+            className="flex items-center gap-2 text-gray-500"
           >
-            All
+            <Share2 className="w-6 h-6" />
+            <span>Share</span>
           </button>
-          {regions.map((region) => (
-            <button
-              key={region}
-              onClick={() => setSelectedRegion(region)}
-              className={`px-4 py-2 rounded-full ${
-                selectedRegion === region
-                  ? 'bg-green-700 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              {region}
-            </button>
+
+          {showShareMenu && (
+            <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg p-4 flex gap-4">
+              <FacebookShareButton url={shareUrl}>
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
+              <TwitterShareButton url={shareUrl}>
+                <TwitterIcon size={32} round />
+              </TwitterShareButton>
+              <LinkedinShareButton url={shareUrl}>
+                <LinkedinIcon size={32} round />
+              </LinkedinShareButton>
+              <WhatsappShareButton url={shareUrl}>
+                <WhatsappIcon size={32} round />
+              </WhatsappShareButton>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Comments</h2>
+        <form onSubmit={handleComment} className="mb-6">
+          <textarea
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder="Write a comment..."
+            className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+            rows={3}
+          />
+          <button
+            type="submit"
+            className="mt-2 px-6 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800"
+          >
+            Post Comment
+          </button>
+        </form>
+
+        <div className="space-y-6">
+          {comments.map((comment) => (
+            <div key={comment.id} className="bg-gray-50 rounded-lg p-4">
+              <div className="flex justify-between items-center mb-2">
+                <span className="font-medium">{comment.author}</span>
+                <span className="text-sm text-gray-500">
+                  {new Date(comment.date).toLocaleDateString()}
+                </span>
+              </div>
+              <p className="text-gray-600">{comment.content}</p>
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Articles Grid */}
-      <div className="grid md:grid-cols-2 gap-8">
-        {filteredArticles.map((article) => (
-          <article key={article.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <img
-              src={article.image}
-              alt={article.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-green-700 font-medium">{article.region}</span>
-                <span className="text-sm text-gray-500">{article.date}</span>
-              </div>
-              <h2 className="text-xl font-bold text-gray-900 mb-2">{article.title}</h2>
-              <p className="text-gray-600 mb-4">{article.excerpt}</p>
-              <Link 
-                to={`/news/${article.id}`}
-                className="text-green-700 font-medium hover:text-green-800"
-              >
-                Read More →
-              </Link>
-            </div>
-          </article>
+      <div className="flex flex-wrap gap-2">
+        {article.tags.map((tag) => (
+          <span
+            key={tag}
+            className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+          >
+            #{tag}
+          </span>
         ))}
       </div>
     </div>
   );
 }
 
-export default Newsfeed;
+export default NewsArticle;
