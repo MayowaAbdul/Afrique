@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Heart, MessageCircle, Share2 } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { ArrowLeft, Heart, MessageCircle, Share2 } from 'lucide-react';
 import hon from '../assets/hon.jpg';
 import nana from '../assets/nana.jpg';
 import abdel from '../assets/abdel.jpg';
@@ -199,6 +199,7 @@ interface Comment {
 
 function NewsArticle() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const article = articles.find(a => a.id === Number(id));
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
@@ -234,10 +235,11 @@ function NewsArticle() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
       <img
         src={article.image}
         alt={article.title}
-        className="w-full h-96 object-cover rounded-lg mb-8"
+        className="w-full h-60 object-contain"
       />
 
       <div className="mb-8">
@@ -345,6 +347,13 @@ function NewsArticle() {
           </span>
         ))}
       </div>
+            <button
+        onClick={() => navigate('/newsfeed')}
+        className="flex items-center text-green-700 hover:text-green-800 group"
+      >
+        <ArrowLeft className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" />
+        Back to Newsfeed
+      </button>
     </div>
   );
 }

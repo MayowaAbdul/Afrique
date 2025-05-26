@@ -42,7 +42,7 @@ function App() {
             
             <Route path="/newsfeed" element={<PageWrapper><Newsfeed /></PageWrapper>} />
 
-            <Route path="/news/:id" element={<PageWrapper><NewsArticle /></PageWrapper>} />
+            <Route path="/news/:id" element={<NewsArticle />} />
             
             <Route path="/magazine" element={<PageWrapper><Magazine /></PageWrapper>} />
             

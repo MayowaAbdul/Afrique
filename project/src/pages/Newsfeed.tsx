@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'lucide-react';
+import {Link} from 'react-router-dom';
 import hon from '../assets/hon.jpg';
 import nana from '../assets/nana.jpg';
 import abdel from '../assets/abdel.jpg';
@@ -237,7 +237,7 @@ function Newsfeed() {
             <img
               src={article.image}
               alt={article.title}
-              className="w-full h-48 object-cover"
+              className="w-full h-60 object-contain"
             />
             <div className="p-6">
               <div className="flex justify-between items-center mb-2">
