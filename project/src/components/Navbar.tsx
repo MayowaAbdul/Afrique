@@ -6,6 +6,7 @@ import BeamAfrique from '../assets/BeamAfrique.png';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [visitorCount, setVisitorCount] = useState(0);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -13,9 +14,16 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-    useEffect(() => {
-       const count = parseInt(localStorage.getItem('visitorCount') || '0');
-    if (!localStorage.getItem('visitorCount')) {
+  useEffect(() => {
+    // Get or initialize visitor count
+    const count = parseInt(localStorage.getItem('visitorCount') || '0');
+    
+    // Generate unique visitor ID if not exists
+    const visitorId = localStorage.getItem('visitorId') || 
+      Math.random().toString(36).substring(2) + Date.now().toString(36);
+    
+    if (!localStorage.getItem('visitorId')) {
+      localStorage.setItem('visitorId', visitorId);
       localStorage.setItem('visitorCount', (count + 1).toString());
       setVisitorCount(count + 1);
     } else {

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Heart, MessageCircle, Share2 } from 'lucide-react';
+import { ArrowLeft, Heart, MessageCircle, Share2, Trash2 } from 'lucide-react';
 import hon from '../assets/hon.jpg';
 import nana from '../assets/nana.jpg';
 import abdel from '../assets/abdel.jpg';
@@ -201,11 +201,29 @@ function NewsArticle() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const article = articles.find(a => a.id === Number(id));
-  const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(0);
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [comment, setComment] = useState('');
-  const [comments, setComments] = useState<Comment[]>([]);
+
+  const [liked, setLiked] = useState(() => {
+  const saved = localStorage.getItem(`article-${id}-liked`);
+  return saved ? JSON.parse(saved) : false;
+  });
+
+  const [likes, setLikes] = useState(() => {
+  const saved = localStorage.getItem(`article-${id}-likes`);
+  return saved ? JSON.parse(saved) : 0;
+  });
+
+  const [comments, setComments] = useState<Comment[]>(() => {
+  const saved = localStorage.getItem(`article-${id}-comments`);
+  return saved ? JSON.parse(saved) : [];
+  });
+
+    useEffect(() => {
+    localStorage.setItem(`article-${id}-liked`, JSON.stringify(liked));
+    localStorage.setItem(`article-${id}-likes`, JSON.stringify(likes));
+    localStorage.setItem(`article-${id}-comments`, JSON.stringify(comments));
+  }, [liked, likes, comments, id]);
 
   if (!article) {
     return <div className="text-center py-12">Article not found</div>;
@@ -220,8 +238,8 @@ function NewsArticle() {
     e.preventDefault();
     if (!comment.trim()) return;
 
-    const newComment: Comment = {
-      id: comments.length + 1,
+      const newComment: Comment = {
+      id: Date.now(),
       author: 'Anonymous User',
       content: comment,
       date: new Date().toISOString()
@@ -229,6 +247,10 @@ function NewsArticle() {
 
     setComments([...comments, newComment]);
     setComment('');
+  };
+
+    const handleDeleteComment = (commentId: number) => {
+    setComments(comments.filter(c => c.id !== commentId));
   };
 
   const shareUrl = window.location.href;
@@ -327,9 +349,17 @@ function NewsArticle() {
             <div key={comment.id} className="bg-gray-50 rounded-lg p-4">
               <div className="flex justify-between items-center mb-2">
                 <span className="font-medium">{comment.author}</span>
-                <span className="text-sm text-gray-500">
-                  {new Date(comment.date).toLocaleDateString()}
-                </span>
+                <div className="flex items-center gap-4">
+                  <span className="text-sm text-gray-500">
+                    {new Date(comment.date).toLocaleDateString()}
+                  </span>
+                  <button
+                    onClick={() => handleDeleteComment(comment.id)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
               <p className="text-gray-600">{comment.content}</p>
             </div>
