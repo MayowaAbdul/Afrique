@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, LogOut, Users } from 'lucide-react';
+import { Menu, X, LogOut} from 'lucide-react';
 import BeamAfrique from '../assets/BeamAfrique.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [visitorCount, setVisitorCount] = useState(0);
-
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -14,22 +12,6 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  useEffect(() => {
-    // Get or initialize visitor count
-    const count = parseInt(localStorage.getItem('visitorCount') || '0');
-    
-    // Generate unique visitor ID if not exists
-    const visitorId = localStorage.getItem('visitorId') || 
-      Math.random().toString(36).substring(2) + Date.now().toString(36);
-    
-    if (!localStorage.getItem('visitorId')) {
-      localStorage.setItem('visitorId', visitorId);
-      localStorage.setItem('visitorCount', (count + 1).toString());
-      setVisitorCount(count + 1);
-    } else {
-      setVisitorCount(count);
-    }
-  }, []);
 
   // Simple auth check
   const isLoggedIn = Boolean(localStorage.getItem('accessToken'));
@@ -86,11 +68,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
-                        {/* Visitor Counter */}
-            <div className="flex items-center px-3 py-1 bg-green-100 rounded-full text-green-700">
-              <Users className="w-4 h-4 mr-1" />
-              <span className="text-sm font-medium">{visitorCount} visitors</span>
-            </div>
+                      
             {filteredNavItems.map((item) => (
               <Link
                 key={item.path}
@@ -119,10 +97,6 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
-            <div className="flex items-center px-2 py-1 bg-green-100 rounded-full text-green-700">
-              <Users className="w-4 h-4 mr-1" />
-              <span className="text-sm font-medium">{visitorCount}</span>
-            </div>
             <button
               onClick={toggleMenu}
               className="text-gray-700 hover:text-red-600 hover:scale-110 transition-all duration-300"

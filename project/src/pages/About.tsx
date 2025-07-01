@@ -318,12 +318,9 @@ const About = () => {
             alt={member.name}
             className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
           />
-          {/* <h3 className="text-xl font-semibold text-gray-800">{member.name}</h3> */}
           <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800">{member.name}</h3>
           <p className="text-sm sm:text-base text-red-600 font-medium"> {member.role}</p>
-          {/* <p className="text-red-600 font-medium">{member.role}</p> */}
           <p className="text-sm sm:text-base text-black-600 font-medium">{member.location}</p>
-          {/* <p className="text-black-600 font-medium">{member.location}</p> */}
         </div>
       ))}
     </div>
