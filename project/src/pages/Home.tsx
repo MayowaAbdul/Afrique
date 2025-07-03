@@ -1,48 +1,41 @@
+// src/pages/Home.tsx
+import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 import BeamAfrique from "../assets/BeamAfrique.png";
 import Article from "../assets/Article.jpg";
 import { Clock, ArrowRight, TrendingUp } from 'lucide-react';
 
+interface Post {
+  id: number;
+  title: string;
+  description: string;
+  file_url: string | null;
+  created_at: string;
 
-const newsTopics = [
-  {
-    id: 1,
-    title: 'Malawi ',
-    category: 'Politics',
-    timeAgo: '2 hours ago',
-    isNew: true
-  },
-  {
-    id: 2,
-    title: 'Ghanas Celebration',
-    category: 'Celebration',
-    timeAgo: '5 hours ago',
-    isNew: true
-  },
-  {
-    id: 3,
-    title: 'Egypt Recoveries',
-    category: 'Recoveries',
-    timeAgo: '1 day ago',
-    isNew: false
-  },
-  {
-    id: 4,
-    title: 'Kenya Supports Security',
-    category: 'Security',
-    timeAgo: '2 days ago',
-    isNew: false
-  },
-  {
-    id: 5,
-    title: 'Africas Travel Indaba',
-    category: 'Sports',
-    timeAgo: '3 days ago',
-    isNew: false
-  }
-];
+  region?: string;
+}
 
 const Home = () => {
+
+  const [sidebarItems, setSidebarItems] = useState<Post[]>([]);
+  // —————————————————————————
+  // Featured Stories
+  const [featured, setFeatured] = useState<Post[]>([]);
+
+  useEffect(() => {
+    // Fetch Sidebar: latest 5 news
+    axios
+      .get<Post[]>('https://api.beamafrique.com/api/content/', { params: { section: 'news' } })
+      .then(res => setSidebarItems(res.data.slice(0, 5)))
+      .catch(console.error);
+
+    // Fetch Featured: first 3 news
+    axios
+      .get<Post[]>('https://api.beamafrique.com/api/content/', { params: { section: 'news' } })
+      .then(res => setFeatured(res.data.slice(0, 3)))
+      .catch(console.error);
+  }, []);
   return (
     <div className="min-h-screen">
       {/* Hero Section with Gradient and Animation */}
@@ -100,40 +93,39 @@ const Home = () => {
     </div>
 
     {/* Sidebar Content */}
-    <div className="flex-1 p-4 overflow-y-auto">
-      <div className="space-y-3">
-        {newsTopics.map((topic) => (
-          <Link
-            key={topic.id}
-            to={`/news/${topic.id}`}
-            className="block p-3 rounded-lg border border-gray-100 hover:border-green-300 hover:shadow-md transition-all duration-300 group bg-white hover:bg-green-50"
-          >
-            <div className="flex items-start justify-between">
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="inline-block px-2 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">
-                    {topic.category}
-                  </span>
-                  {topic.isNew && (
-                    <span className="inline-block px-2 py-1 text-xs font-medium text-red-700 bg-red-100 rounded-full animate-pulse">
-                      NEW
-                    </span>
-                  )}
+        <div className="flex-1 p-4 overflow-y-auto">
+          <div className="space-y-3">
+            {sidebarItems.map((post) => (
+              <Link
+                key={post.id}
+                to={`/news/${post.id}`}
+                className="block p-3 rounded-lg border border-gray-100 hover:border-green-300 hover:shadow-md transition-all duration-300 group bg-white hover:bg-green-50"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="inline-block px-2 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">
+                        {post.region}
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-semibold text-gray-900 group-hover:text-green-700 transition-colors leading-tight mb-2">
+                      {post.title}
+                    </h3>
+                    <div className="flex items-center text-xs text-gray-500">
+                      <Clock className="w-3 h-3 mr-1" />
+                      {new Date(post.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </div>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-green-700 transition-colors ml-2 flex-shrink-0" />
                 </div>
-                <h3 className="text-sm font-semibold text-gray-900 group-hover:text-green-700 transition-colors leading-tight mb-2">
-                  {topic.title}
-                </h3>
-                <div className="flex items-center text-xs text-gray-500">
-                  <Clock className="w-3 h-3 mr-1" />
-                  {topic.timeAgo}
-                </div>
-              </div>
-              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-green-700 transition-colors ml-2 flex-shrink-0" />
-            </div>
-          </Link>
-        ))}
-      </div>
-    </div>
+              </Link>
+            ))}
+            {sidebarItems.length === 0 && (
+              <p className="text-center text-gray-500">No news to show.</p>
+            )}
+          </div>
+        </div>
+
 
     {/* Sidebar Footer */}
     <div className="p-4 border-t border-gray-200 bg-gray-50">
@@ -184,26 +176,25 @@ const Home = () => {
             Featured <span className="text-red-600">Stories</span>
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
+            {featured.map(post => (
               <div
-                key={item}
+                key={post.id}
                 className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 hover:shadow-xl transition-all duration-300"
               >
                 <img
-                  src={Article}
-                  alt="Story"
+                  src={post.file_url ?? '/fallback-image.jpg'}
+                  alt={post.title}
                   className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 text-gray-800">
-                    Featured Story {item}
+                    {post.title}
                   </h3>
-                  <p className="text-gray-600 mb-4">
-                    Discover the latest developments and stories from across
-                    Africa...
+                  <p className="text-gray-600 mb-4 line-clamp-2">
+                    {post.description}
                   </p>
                   <Link
-                    to="/newsfeed"
+                    to={`/news/${post.id}`}
                     className="text-red-600 font-semibold hover:text-red-700 hover:translate-x-2 inline-block transition-all duration-300"
                   >
                     Read More →
@@ -211,6 +202,11 @@ const Home = () => {
                 </div>
               </div>
             ))}
+            {featured.length === 0 && (
+              <p className="col-span-full text-center text-gray-500">
+                No featured stories available.
+              </p>
+            )}
           </div>
         </div>
       </section>
