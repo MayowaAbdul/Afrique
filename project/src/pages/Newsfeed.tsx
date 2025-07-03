@@ -14,27 +14,34 @@ const REGIONS = [
   'America'
 ];
 
+interface Comment {
+  id: number;
+  author: string;
+  content: string;
+  created_at: string;
+}
+
 interface Post {
   id: number;
   title: string;
   region: string;
-  file: string;           // URL to your uploaded image/video
+  file_url: string;
   created_at: string;
   author_name: string;
-  description: string;    // we’ll use this as excerpt
+  description: string;
   likes: number;
-  comments: any[];
+  comments: Comment[];
 }
 
 export default function Newsfeed() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [region, setRegion] = useState<string>('All');
+  const [posts, setPosts]     = useState<Post[]>([]);
+  const [region, setRegion]   = useState<string>('All');
 
   useEffect(() => {
-    axios.get('https://api.beamafrique.com/api/content/', {
+    axios.get<Post[]>('https://api.beamafrique.com/api/content/', {
       params: { section: 'news' }
     })
-    .then(r => setPosts(r.data))
+    .then(resp => setPosts(resp.data))
     .catch(console.error);
   }, []);
 
@@ -71,14 +78,16 @@ export default function Newsfeed() {
             className="bg-white rounded-lg shadow-lg overflow-hidden"
           >
             <img
-              src={post.file}
+              src={post.file_url}
               alt={post.title}
               className="w-full h-60 object-cover"
             />
             <div className="p-6">
               <div className="flex justify-between text-sm text-gray-500 mb-2">
                 <span className="text-green-700 font-medium">{post.region}</span>
-                <span>{new Date(post.created_at).toLocaleDateString()}</span>
+                <span>
+                  {new Date(post.created_at).toLocaleDateString()}
+                </span>
               </div>
               <h2 className="text-xl font-bold mb-2">{post.title}</h2>
               <p className="text-gray-600 mb-4 line-clamp-2">

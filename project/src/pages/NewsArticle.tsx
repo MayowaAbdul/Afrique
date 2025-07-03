@@ -2,11 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {
-  ArrowLeft,
-  Heart,
-  MessageCircle,
-  Share2,
-  Trash2
+  ArrowLeft, Heart, MessageCircle, Share2, Trash2
 } from 'lucide-react';
 import {
   FacebookShareButton, FacebookIcon,
@@ -26,7 +22,7 @@ interface Post {
   id: number;
   title: string;
   region: string;
-  file: string;
+  file_url: string;
   created_at: string;
   author_name: string;
   description: string;
@@ -36,14 +32,13 @@ interface Post {
 
 export default function NewsArticle() {
   const { id } = useParams<{ id: string }>();
-  const nav = useNavigate();
-  const [post, setPost] = useState<Post | null>(null);
+  const nav    = useNavigate();
+  const [post, setPost]       = useState<Post | null>(null);
   const [newComment, setNewComment] = useState('');
-  const [showShare, setShowShare] = useState(false);
+  const [showShare, setShowShare]   = useState(false);
 
   useEffect(() => {
-    axios
-      .get(`https://api.beamafrique.com/api/content/${id}/`)
+    axios.get<Post>(`https://api.beamafrique.com/api/content/${id}/`)
       .then(r => setPost(r.data))
       .catch(console.error);
   }, [id]);
@@ -51,25 +46,26 @@ export default function NewsArticle() {
   if (!post) return <p className="p-12 text-center">Loading…</p>;
 
   const handleLike = () => {
-    axios
-      .post(`https://api.beamafrique.com/api/content/${id}/like/`)
-      .then(r => setPost({ ...post, likes: r.data.likes }))
-      .catch(console.error);
+    axios.post<{ likes: number }>(
+      `https://api.beamafrique.com/api/content/${id}/like/`
+    )
+    .then(r => setPost({ ...post, likes: r.data.likes }))
+    .catch(console.error);
   };
 
   const submitComment = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newComment.trim()) return;
-    axios
-      .post(`https://api.beamafrique.com/api/content/${id}/comment/`, {
-        author: 'Guest',
-        content: newComment
-      })
-      .then(r => {
-        setPost({ ...post, comments: [...post.comments, r.data] });
-        setNewComment('');
-      })
-      .catch(console.error);
+
+    axios.post<Comment>(
+      `https://api.beamafrique.com/api/content/${id}/comment/`,
+      { author: 'Guest', content: newComment }
+    )
+    .then(r => {
+      setPost({ ...post, comments: [...post.comments, r.data] });
+      setNewComment('');
+    })
+    .catch(console.error);
   };
 
   const shareUrl = window.location.href;
@@ -84,7 +80,7 @@ export default function NewsArticle() {
       </button>
 
       <img
-        src={post.file}
+        src={post.file_url}
         alt={post.title}
         className="w-full h-60 object-cover rounded-lg mb-6"
       />
@@ -111,7 +107,6 @@ export default function NewsArticle() {
         >
           <Heart /> {post.likes}
         </button>
-
         <button className="flex items-center gap-1 text-gray-500">
           <MessageCircle /> {post.comments.length}
         </button>
@@ -161,7 +156,9 @@ export default function NewsArticle() {
             <div key={c.id} className="p-4 bg-gray-50 rounded-lg">
               <div className="flex justify-between text-sm text-gray-500 mb-1">
                 <span>{c.author}</span>
-                <span>{new Date(c.created_at).toLocaleDateString()}</span>
+                <span>
+                  {new Date(c.created_at).toLocaleDateString()}
+                </span>
               </div>
               <p>{c.content}</p>
             </div>
