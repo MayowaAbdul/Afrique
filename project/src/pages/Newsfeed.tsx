@@ -80,7 +80,7 @@ export default function Newsfeed() {
             <img
               src={post.file_url}
               alt={post.title}
-              className="w-full h-60 object-cover"
+              className="w-full h-60 object-contain"
             />
             <div className="p-6">
               <div className="flex justify-between text-sm text-gray-500 mb-2">

@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import BeamAfrique from "../assets/BeamAfrique.png";
-import Article from "../assets/Article.jpg";
 import { Clock, ArrowRight, TrendingUp } from 'lucide-react';
 
 interface Post {
@@ -39,9 +38,9 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Gradient and Animation */}
- <div className="relative bg-gray-900 flex flex-col lg:flex-row pt-16 h-auto lg:max-h-[80vh]">
+ <div className="relative bg-gray-900 flex flex-col lg:flex-row pt-16 h-100 lg:max-h-[80vh]">
   {/* Main Hero Content */}
-  <div className="flex-1 relative h-[60vh] sm:h-[70vh] lg:h-auto">
+  <div className="flex-1 relative h-[70vh] sm:h-[70vh] lg:h-auto">
     <div className="absolute inset-0">
       <img
         className="w-full h-full object-cover"
@@ -184,7 +183,7 @@ const Home = () => {
                 <img
                   src={post.file_url ?? '/fallback-image.jpg'}
                   alt={post.title}
-                  className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
+                  className="w-full h-48 object-contain transition-transform duration-300 hover:scale-110"
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 text-gray-800">

@@ -82,7 +82,7 @@ export default function NewsArticle() {
       <img
         src={post.file_url}
         alt={post.title}
-        className="w-full h-60 object-cover rounded-lg mb-6"
+        className="w-full h-60 object-contain rounded-lg mb-6"
       />
 
       <div className="flex justify-between text-sm text-gray-500 mb-2">
