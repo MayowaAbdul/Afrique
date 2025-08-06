@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import BeamAfrique from "../assets/BeamAfrique.png";
 import { Clock, ArrowRight, TrendingUp } from 'lucide-react';
+import rasheed from '../assets/rasheed.jpg';
+import charles from '../assets/charles.jpg';
+import olasumbo from '../assets/olasumbo.jpg';
 
 interface Post {
   id: number;
@@ -11,7 +14,6 @@ interface Post {
   description: string;
   file_url: string | null;
   created_at: string;
-
   region?: string;
 }
 
@@ -21,6 +23,9 @@ const Home = () => {
   // —————————————————————————
   // Featured Stories
   const [featured, setFeatured] = useState<Post[]>([]);
+  const [viewers, setViewers] = useState<number>(0);
+
+  
 
   useEffect(() => {
     // Fetch Sidebar: latest 5 news
@@ -34,6 +39,13 @@ const Home = () => {
       .get<Post[]>('https://api.beamafrique.com/api/content/', { params: { section: 'news' } })
       .then(res => setFeatured(res.data.slice(0, 3)))
       .catch(console.error);
+
+      // Increment and fetch viewer count
+    axios.post('https://api.beamafrique.com/api/viewers/home')
+      .then(() => axios.get<{ count: number }>('https://api.beamafrique.com/api/viewers/home'))
+      .then(res => setViewers(res.data.count))
+      .catch(console.error);
+
   }, []);
   return (
     <div className="min-h-screen">
@@ -139,6 +151,14 @@ const Home = () => {
   </div>
 </div>
 
+{/* Viewer Count Section */}
+      <section className="bg-white py-4 border-t border-b border-gray-100 text-center">
+        <p className="text-sm text-gray-600">
+          👁️ This page has been viewed{' '}
+          <span className="font-bold text-green-600">{viewers}</span> times
+        </p>
+      </section>
+
 
       {/* Advertisement Section */}
       <section className="py-12 bg-white">
@@ -206,6 +226,75 @@ const Home = () => {
                 No featured stories available.
               </p>
             )}
+          </div>
+        </div>
+      </section>
+
+            {/* ========== New Additions Start Here ========== */}
+      {/* Categories */}
+      <section className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Explore By <span className="text-green-600">Categories</span></h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {['Culture', 'Politics', 'Economy', 'Tech', 'Diaspora', 'Education'].map((tag, idx) => (
+              <Link key={idx} to={`/newsfeed?category=${tag.toLowerCase()}`} className="px-4 py-2 bg-gray-100 text-sm text-gray-700 rounded-full hover:bg-green-100 hover:text-green-700 transition">
+                #{tag}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* Video */}
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Stories That <span className="text-red-600">Inspire</span></h2>
+          <div className="aspect-w-16 aspect-h-9 max-w-4xl mx-auto mb-6">
+            <iframe className="w-full h-full rounded-lg" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Documentary" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;" allowFullScreen />
+          </div>
+          <p className="text-gray-600">A glimpse into Africa’s innovation, people, and beauty.</p>
+        </div>
+      </section>
+
+      {/* Contributors */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-12">Meet Our <span className="text-green-600">Voices</span></h2>
+          <div className="grid md:grid-cols-3 gap-8 text-center">
+            {[
+              { name: "Rasheed Olokode", role: "Publisher/Editor-in-Chief", img: rasheed },
+              { name: "Charles Kungwengwe", role: "Editor", img: charles },
+              { name: "Olasunmbo Ojomu", role: "Associate Publisher/Deputy Editor", img: olasumbo},
+            ].map((author, idx) => (
+              <div key={idx} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
+                <img src={author.img} alt={author.name} className="w-20 h-20 mx-auto rounded-full mb-4 object-cover" />
+                <h3 className="font-semibold text-gray-800">{author.name}</h3>
+                <p className="text-sm text-gray-500">{author.role}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Quote */}
+      <section className="bg-white py-16">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Voices of <span className="text-red-600">Wisdom</span></h2>
+          <div className="text-xl italic text-gray-700 animate-pulse transition-all duration-500">
+            “Until the lion learns how to write, every story will glorify the hunter.” — African Proverb
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section className="bg-green-50 py-12">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Subscribe to Our Newsletter</h2>
+          <p className="text-gray-600 mb-6">Get curated African stories and opportunities in your inbox every week.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <input type="email" placeholder="Enter your email" className="px-4 py-2 rounded-lg border border-gray-300 w-full sm:w-auto flex-1" />
+            <button className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">Subscribe</button>
           </div>
         </div>
       </section>
