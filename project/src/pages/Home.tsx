@@ -20,27 +20,22 @@ interface Post {
 const Home = () => {
 
   const [sidebarItems, setSidebarItems] = useState<Post[]>([]);
-  // —————————————————————————
-  // Featured Stories
   const [featured, setFeatured] = useState<Post[]>([]);
   const [viewers, setViewers] = useState<number>(0);
 
   
 
   useEffect(() => {
-    // Fetch Sidebar: latest 5 news
     axios
       .get<Post[]>('https://api.beamafrique.com/api/content/', { params: { section: 'news' } })
       .then(res => setSidebarItems(res.data.slice(0, 5)))
       .catch(console.error);
 
-    // Fetch Featured: first 3 news
     axios
       .get<Post[]>('https://api.beamafrique.com/api/content/', { params: { section: 'news' } })
       .then(res => setFeatured(res.data.slice(0, 3)))
       .catch(console.error);
 
-      // Increment and fetch viewer count
     axios.post('https://api.beamafrique.com/api/viewers/home')
       .then(() => axios.get<{ count: number }>('https://api.beamafrique.com/api/viewers/home'))
       .then(res => setViewers(res.data.count))
@@ -48,10 +43,8 @@ const Home = () => {
 
   }, []);
   return (
-    <div className="min-h-screen">
-      {/* Hero Section with Gradient and Animation */}
+    <div className="min-h-screen">   
  <div className="relative bg-gray-900 flex flex-col lg:flex-row pt-16 h-100 lg:max-h-[80vh]">
-  {/* Main Hero Content */}
   <div className="flex-1 relative h-[70vh] sm:h-[70vh] lg:h-auto">
     <div className="absolute inset-0">
       <img
