@@ -22,6 +22,9 @@ const Home = () => {
   const [sidebarItems, setSidebarItems] = useState<Post[]>([]);
   const [featured, setFeatured] = useState<Post[]>([]);
   const [viewers, setViewers] = useState<number>(0);
+  const [todayViews, setTodayViews] = useState(0);
+  const [weekViews, setWeekViews] = useState(0);
+  const [totalViews, setTotalViews] = useState(0);
 
   
 
@@ -37,9 +40,20 @@ const Home = () => {
       .catch(console.error);
 
     axios.post('https://api.beamafrique.com/api/viewers/home')
-      .then(() => axios.get<{ count: number }>('https://api.beamafrique.com/api/viewers/home'))
-      .then(res => setViewers(res.data.count))
-      .catch(console.error);
+    .then(() =>
+      // Then fetch all three counts in parallel
+      Promise.all([
+        axios.get('https://api.beamafrique.com/api/viewers/today'),
+        axios.get('https://api.beamafrique.com/api/viewers/week'),
+        axios.get('https://api.beamafrique.com/api/viewers/total')
+      ])
+    )
+    .then(([todayRes, weekRes, totalRes]) => {
+      setTodayViews(todayRes.data.count || 0);
+      setWeekViews(weekRes.data.count || 0);
+      setTotalViews(totalRes.data.count || 0);
+    })
+    .catch(console.error);
 
   }, []);
   return (
@@ -145,12 +159,31 @@ const Home = () => {
 </div>
 
 {/* Viewer Count Section */}
-      <section className="bg-white py-4 border-t border-b border-gray-100 text-center">
-        <p className="text-sm text-gray-600">
-          👁️ This page has been viewed{' '}
-          <span className="font-bold text-green-600">{viewers}</span> times
-        </p>
-      </section>
+<section className="bg-white py-8 border-t border-b border-gray-100">
+  <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 px-4">
+
+    {/* Today Views */}
+    <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center shadow-sm">
+      <p className="text-sm text-gray-600">👁️ Today’s Views</p>
+      <p className="text-2xl font-bold text-green-600">{todayViews}</p>
+    </div>
+
+    {/* This Week Views */}
+    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center shadow-sm">
+      <p className="text-sm text-gray-600">📅 This Week</p>
+      <p className="text-2xl font-bold text-blue-600">{weekViews}</p>
+    </div>
+
+    {/* Total Views */}
+    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-center shadow-sm">
+      <p className="text-sm text-gray-600">🌍 Total Views</p>
+      <p className="text-2xl font-bold text-yellow-600">{totalViews}</p>
+    </div>
+
+  </div>
+</section>
+
+
 
 
       {/* Advertisement Section */}
