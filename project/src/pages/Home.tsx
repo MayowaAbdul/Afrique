@@ -39,19 +39,12 @@ const Home = () => {
       .then(res => setFeatured(res.data.slice(0, 3)))
       .catch(console.error);
 
-    axios.post('https://api.beamafrique.com/api/viewers/home')
-    .then(() =>
-      // Then fetch all three counts in parallel
-      Promise.all([
-        axios.get('https://api.beamafrique.com/api/viewers/today'),
-        axios.get('https://api.beamafrique.com/api/viewers/week'),
-        axios.get('https://api.beamafrique.com/api/viewers/total')
-      ])
-    )
-    .then(([todayRes, weekRes, totalRes]) => {
-      setTodayViews(todayRes.data.count || 0);
-      setWeekViews(weekRes.data.count || 0);
-      setTotalViews(totalRes.data.count || 0);
+    axios.post('https://api.beamafrique.com/api/viewers/home/')
+    .then(res => {
+      const counts = res.data.counts || {};
+      setTodayViews(counts.today || 0);
+      setWeekViews(counts.week || 0);
+      setTotalViews(counts.total || 0);
     })
     .catch(console.error);
 
